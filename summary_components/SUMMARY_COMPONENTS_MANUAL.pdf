@@ -1,0 +1,598 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R] /Count 9 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 3857 >>
+stream
+BT /F2 22.00 Tf 130.00 696.00 Td (summary_components Module Manual) Tj ET
+BT /F1 10.00 Tf 248.50 666.00 Td (MyCodingRiver_2016_2026) Tj ET
+BT /F1 10.00 Tf 253.50 651.00 Td (Generated: 2026-08-18) Tj ET
+BT /F1 9.80 Tf 54.00 636.00 Td (This manual explains the purpose, structure, interfaces, build flow, and expected integration) Tj ET
+BT /F1 9.80 Tf 54.00 623.80 Td (pattern of the summary_components folder. The code is organized as a testable C component summary) Tj ET
+BT /F1 9.80 Tf 54.00 611.60 Td (for a speech interaction pipeline. It is not a complete production speech client or server; it is) Tj ET
+BT /F1 9.80 Tf 54.00 599.40 Td (a clean reference layer that captures legacy system concepts behind small interfaces and unit) Tj ET
+BT /F1 9.80 Tf 54.00 587.20 Td (tests.) Tj ET
+BT /F2 15.00 Tf 54.00 554.00 Td (Purpose) Tj ET
+BT /F1 9.80 Tf 54.00 532.00 Td (The summary_components folder groups old speech-client and speech-server engineering ideas into) Tj ET
+BT /F1 9.80 Tf 54.00 519.80 Td (three clear C modules:) Tj ET
+BT /F1 9.60 Tf 62.00 502.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 502.60 Td (core_engineering: low-level Linux/C helpers.) Tj ET
+BT /F1 9.60 Tf 62.00 490.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 490.60 Td (audio_speech_processing: audio format, device, VAD, voice, and ASR interface examples.) Tj ET
+BT /F1 9.60 Tf 62.00 478.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 478.60 Td (business_interaction: packet protocol, HTTP request generation, JSON extraction, and command) Tj ET
+BT /F1 9.60 Tf 78.00 466.60 Td (routing examples.) Tj ET
+BT /F1 9.80 Tf 54.00 454.60 Td (The practical function of this folder is to provide a readable and testable map of a voice) Tj ET
+BT /F1 9.80 Tf 54.00 442.40 Td (assistant style system:) Tj ET
+BT /F3 8.30 Tf 70.00 422.20 Td (Microphone) Tj ET
+BT /F3 8.30 Tf 70.00 412.40 Td (  -> ALSA/tinyalsa record) Tj ET
+BT /F3 8.30 Tf 70.00 402.60 Td (  -> voice preprocessing) Tj ET
+BT /F3 8.30 Tf 70.00 392.80 Td (  -> VAD speech detection) Tj ET
+BT /F3 8.30 Tf 70.00 383.00 Td (  -> PCM or Opus packet) Tj ET
+BT /F3 8.30 Tf 70.00 373.20 Td (  -> TCP post_content protocol) Tj ET
+BT /F3 8.30 Tf 70.00 363.40 Td (  -> UniSound ASR) Tj ET
+BT /F3 8.30 Tf 70.00 353.60 Td (  -> text result) Tj ET
+BT /F3 8.30 Tf 70.00 343.80 Td (  -> command server HTTP/TCP request) Tj ET
+BT /F3 8.30 Tf 70.00 334.00 Td (  -> JSON command response) Tj ET
+BT /F3 8.30 Tf 70.00 324.20 Td (  -> TTS / music / media control action) Tj ET
+BT /F3 8.30 Tf 70.00 314.40 Td (  -> MP3/audio playback) Tj ET
+BT /F2 15.00 Tf 54.00 282.60 Td (Directory Layout) Tj ET
+BT /F1 9.80 Tf 54.00 260.60 Td (The folder layout is intentionally responsibility-based:) Tj ET
+BT /F3 8.30 Tf 70.00 240.40 Td (summary_components) Tj ET
+BT /F3 8.30 Tf 70.00 230.60 Td (|-- ARCHITECTURE_OVERVIEW.md) Tj ET
+BT /F3 8.30 Tf 70.00 220.80 Td (|-- core_engineering) Tj ET
+BT /F3 8.30 Tf 70.00 211.00 Td (|   |-- include/core_interfaces.h) Tj ET
+BT /F3 8.30 Tf 70.00 201.20 Td (|   |-- source) Tj ET
+BT /F3 8.30 Tf 70.00 191.40 Td (|   |-- tests/test_core_interfaces.c) Tj ET
+BT /F3 8.30 Tf 70.00 181.60 Td (|   `-- Makefile) Tj ET
+BT /F3 8.30 Tf 70.00 171.80 Td (|-- audio_speech_processing) Tj ET
+BT /F3 8.30 Tf 70.00 162.00 Td (|   |-- include/audio_interfaces.h) Tj ET
+BT /F3 8.30 Tf 70.00 152.20 Td (|   |-- source) Tj ET
+BT /F3 8.30 Tf 70.00 142.40 Td (|   |-- tests/test_audio_interfaces.c) Tj ET
+BT /F3 8.30 Tf 70.00 132.60 Td (|   `-- Makefile) Tj ET
+BT /F3 8.30 Tf 70.00 122.80 Td (`-- business_interaction) Tj ET
+BT /F3 8.30 Tf 70.00 113.00 Td (    |-- include/business_interfaces.h) Tj ET
+BT /F3 8.30 Tf 70.00 103.20 Td (    |-- source) Tj ET
+BT /F3 8.30 Tf 70.00 93.40 Td (    |-- tests/test_business_interfaces.c) Tj ET
+BT /F3 8.30 Tf 70.00 83.60 Td (    `-- Makefile) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 1) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 3922 >>
+stream
+BT /F1 9.80 Tf 54.00 738.00 Td (The intended dependency direction is:) Tj ET
+BT /F3 8.30 Tf 70.00 717.80 Td (core_engineering) Tj ET
+BT /F3 8.30 Tf 70.00 708.00 Td (  -> audio_speech_processing) Tj ET
+BT /F3 8.30 Tf 70.00 698.20 Td (  -> business_interaction) Tj ET
+BT /F3 8.30 Tf 70.00 688.40 Td (  -> speech client / speech server application) Tj ET
+BT /F1 9.80 Tf 54.00 672.60 Td (The modules are currently independent for testing. The dependency direction documents the intended) Tj ET
+BT /F1 9.80 Tf 54.00 660.40 Td (application architecture, not a strict linker dependency in the current examples.) Tj ET
+BT /F2 15.00 Tf 54.00 627.20 Td (Build and Test) Tj ET
+BT /F1 9.80 Tf 54.00 605.20 Td (Each module has its own Makefile. Build and run each test binary from the module directory:) Tj ET
+BT /F3 8.30 Tf 70.00 585.00 Td (cd core_engineering) Tj ET
+BT /F3 8.30 Tf 70.00 575.20 Td (make run) Tj ET
+BT /F3 8.30 Tf 70.00 565.40 Td () Tj ET
+BT /F3 8.30 Tf 70.00 555.60 Td (cd ../audio_speech_processing) Tj ET
+BT /F3 8.30 Tf 70.00 545.80 Td (make run) Tj ET
+BT /F3 8.30 Tf 70.00 536.00 Td () Tj ET
+BT /F3 8.30 Tf 70.00 526.20 Td (cd ../business_interaction) Tj ET
+BT /F3 8.30 Tf 70.00 516.40 Td (make run) Tj ET
+BT /F1 9.80 Tf 54.00 500.60 Td (The tests use simple C assertions implemented inside the test source files. No third-party C test) Tj ET
+BT /F1 9.80 Tf 54.00 488.40 Td (framework is required.) Tj ET
+BT /F1 9.80 Tf 54.00 471.20 Td (Expected success messages:) Tj ET
+BT /F3 8.30 Tf 70.00 451.00 Td (core_engineering tests passed) Tj ET
+BT /F3 8.30 Tf 70.00 441.20 Td (audio_speech_processing tests passed) Tj ET
+BT /F3 8.30 Tf 70.00 431.40 Td (business_interaction tests passed) Tj ET
+BT /F2 15.00 Tf 54.00 399.60 Td (General Coding Conventions) Tj ET
+BT /F1 9.80 Tf 54.00 377.60 Td (All three modules use a small C-style status convention:) Tj ET
+BT /F1 9.60 Tf 62.00 360.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 360.40 Td (Success is zero: CORE_OK, AUDIO_OK, or BUSINESS_OK.) Tj ET
+BT /F1 9.60 Tf 62.00 348.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 348.40 Td (Failure is negative one: CORE_ERROR, AUDIO_ERROR, or BUSINESS_ERROR.) Tj ET
+BT /F1 9.60 Tf 62.00 336.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 336.40 Td (Most functions validate pointers and sizes before using caller-provided data.) Tj ET
+BT /F1 9.60 Tf 62.00 324.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 324.40 Td (External systems are wrapped by small interfaces, and several are implemented as mocks for) Tj ET
+BT /F1 9.60 Tf 78.00 312.40 Td (testability.) Tj ET
+BT /F1 9.80 Tf 54.00 300.40 Td (The code follows an old-server compatible style: plain C structs, explicit buffer sizes, direct) Tj ET
+BT /F1 9.80 Tf 54.00 288.20 Td (return codes, and dependency-free test programs.) Tj ET
+BT /F2 15.00 Tf 54.00 255.00 Td (core_engineering Module) Tj ET
+BT /F2 12.00 Tf 54.00 223.00 Td (Responsibility) Tj ET
+BT /F1 9.80 Tf 54.00 206.00 Td (The core_engineering module captures low-level system utilities that a speech server or client) Tj ET
+BT /F1 9.80 Tf 54.00 193.80 Td (normally needs:) Tj ET
+BT /F1 9.60 Tf 62.00 176.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 176.60 Td (TCP server socket setup, accept, send-all, and close.) Tj ET
+BT /F1 9.60 Tf 62.00 164.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 164.60 Td (UDP server socket setup.) Tj ET
+BT /F1 9.60 Tf 62.00 152.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 152.60 Td (pthread mutex protected counter.) Tj ET
+BT /F1 9.60 Tf 62.00 140.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 140.60 Td (Log rotation decision helpers.) Tj ET
+BT /F1 9.60 Tf 62.00 128.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 128.60 Td (Process monitor decision helpers.) Tj ET
+BT /F2 12.00 Tf 54.00 106.60 Td (Files) Tj ET
+BT /F3 8.30 Tf 70.00 86.60 Td (core_engineering/include/core_interfaces.h) Tj ET
+BT /F3 8.30 Tf 70.00 76.80 Td (core_engineering/source/core_socket_example.c) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 2) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 4251 >>
+stream
+BT /F3 8.30 Tf 70.00 738.00 Td (core_engineering/source/core_thread_example.c) Tj ET
+BT /F3 8.30 Tf 70.00 728.20 Td (core_engineering/source/core_log_example.c) Tj ET
+BT /F3 8.30 Tf 70.00 718.40 Td (core_engineering/source/core_process_monitor_example.c) Tj ET
+BT /F3 8.30 Tf 70.00 708.60 Td (core_engineering/tests/test_core_interfaces.c) Tj ET
+BT /F2 12.00 Tf 54.00 682.80 Td (Main Data Structures) Tj ET
+BT /F2 9.40 Tf 62.00 665.80 Td (struct core_tcp_server) Tj ET
+BT /F1 9.40 Tf 78.00 654.00 Td (Stores a TCP socket file descriptor, bound port, and listen backlog.) Tj ET
+BT /F2 9.40 Tf 62.00 639.20 Td (struct core_udp_server) Tj ET
+BT /F1 9.40 Tf 78.00 627.40 Td (Stores a UDP socket file descriptor and bound port.) Tj ET
+BT /F2 9.40 Tf 62.00 612.60 Td (struct core_thread_counter) Tj ET
+BT /F1 9.40 Tf 78.00 600.80 Td (Stores a pthread mutex and an integer counter protected by that mutex.) Tj ET
+BT /F2 9.40 Tf 62.00 586.00 Td (struct core_log_config) Tj ET
+BT /F1 9.40 Tf 78.00 574.20 Td (Stores log file name, log path, max size, and number of backups to retain.) Tj ET
+BT /F2 9.40 Tf 62.00 559.40 Td (struct core_monitor_status) Tj ET
+BT /F1 9.40 Tf 78.00 547.60 Td (Stores expected and current process counts for monitor decisions.) Tj ET
+BT /F2 12.00 Tf 54.00 522.80 Td (API Reference) Tj ET
+BT /F2 9.40 Tf 62.00 505.80 Td (core_is_valid_port\(port\)) Tj ET
+BT /F1 9.40 Tf 78.00 494.00 Td (Returns nonzero when the port is in the valid explicit TCP/UDP range, 1 through 65535.) Tj ET
+BT /F2 9.40 Tf 62.00 479.20 Td (core_tcp_server_open\(server, port\)) Tj ET
+BT /F1 9.40 Tf 78.00 467.40 Td (Validates the port, creates a TCP socket, binds to the port, and starts listen with) Tj ET
+BT /F1 9.40 Tf 78.00 455.60 Td (CORE_TCP_BACKLOG.) Tj ET
+BT /F2 9.40 Tf 62.00 440.80 Td (core_tcp_server_accept\(server\)) Tj ET
+BT /F1 9.40 Tf 78.00 429.00 Td (Accepts one TCP client from an opened server socket and returns the client file descriptor.) Tj ET
+BT /F2 9.40 Tf 62.00 414.20 Td (core_tcp_send_all\(fd, buffer, length\)) Tj ET
+BT /F1 9.40 Tf 78.00 402.40 Td (Sends all requested bytes to a connected TCP peer. Returns CORE_OK on success.) Tj ET
+BT /F2 9.40 Tf 62.00 387.60 Td (core_socket_close\(fd_pointer\)) Tj ET
+BT /F1 9.40 Tf 78.00 375.80 Td (Closes a valid socket descriptor and resets it to an invalid value.) Tj ET
+BT /F2 9.40 Tf 62.00 361.00 Td (core_udp_server_open\(server, port\)) Tj ET
+BT /F1 9.40 Tf 78.00 349.20 Td (Validates the port, creates a UDP socket, and binds it to the requested port.) Tj ET
+BT /F2 9.40 Tf 62.00 334.40 Td (core_thread_counter_init\(counter\)) Tj ET
+BT /F1 9.40 Tf 78.00 322.60 Td (Initializes the mutex and sets the counter value to zero.) Tj ET
+BT /F2 9.40 Tf 62.00 307.80 Td (core_thread_counter_add\(counter, delta\)) Tj ET
+BT /F1 9.40 Tf 78.00 296.00 Td (Locks the mutex, adds delta, unlocks the mutex, and returns CORE_OK on success.) Tj ET
+BT /F2 9.40 Tf 62.00 281.20 Td (core_thread_counter_get\(counter\)) Tj ET
+BT /F1 9.40 Tf 78.00 269.40 Td (Reads the counter value with mutex protection.) Tj ET
+BT /F2 9.40 Tf 62.00 254.60 Td (core_thread_counter_destroy\(counter\)) Tj ET
+BT /F1 9.40 Tf 78.00 242.80 Td (Destroys the counter mutex.) Tj ET
+BT /F2 9.40 Tf 62.00 228.00 Td (core_log_need_rotate\(config, current_size\)) Tj ET
+BT /F1 9.40 Tf 78.00 216.20 Td (Returns one when current_size is greater than or equal to config->max_size. Returns zero when) Tj ET
+BT /F1 9.40 Tf 78.00 204.40 Td (rotation is not needed.) Tj ET
+BT /F2 9.40 Tf 62.00 189.60 Td (core_log_format_backup_name\(config, index, out, out_size\)) Tj ET
+BT /F1 9.40 Tf 78.00 177.80 Td (Formats a backup log name using the configured path and file name, for example:) Tj ET
+BT /F3 8.30 Tf 70.00 160.00 Td (logSystem/Server_Runing.log~3.log) Tj ET
+BT /F2 9.40 Tf 62.00 144.20 Td (core_monitor_decide\(status\)) Tj ET
+BT /F1 9.40 Tf 78.00 132.40 Td (Returns CORE_MONITOR_START when current_count is zero, CORE_MONITOR_KEEP when current_count equals) Tj ET
+BT /F1 9.40 Tf 78.00 120.60 Td (expect_count, and CORE_MONITOR_KILL_EXTRA when current_count is greater than expect_count.) Tj ET
+BT /F2 12.00 Tf 54.00 95.80 Td (Implementation Notes) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 3) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 4376 >>
+stream
+BT /F1 9.80 Tf 54.00 738.00 Td (The socket code is Linux/POSIX oriented. The source includes a Windows stub branch so interface) Tj ET
+BT /F1 9.80 Tf 54.00 725.80 Td (tests can still compile in environments that do not provide POSIX socket headers.) Tj ET
+BT /F1 9.80 Tf 54.00 708.60 Td (This module is suitable as a reference for server infrastructure behavior, but production code) Tj ET
+BT /F1 9.80 Tf 54.00 696.40 Td (should add nonblocking I/O handling, timeout strategy, structured logging, and real process) Tj ET
+BT /F1 9.80 Tf 54.00 684.20 Td (discovery.) Tj ET
+BT /F2 15.00 Tf 54.00 651.00 Td (audio_speech_processing Module) Tj ET
+BT /F2 12.00 Tf 54.00 619.00 Td (Responsibility) Tj ET
+BT /F1 9.80 Tf 54.00 602.00 Td (The audio_speech_processing module captures the audio and speech processing stack behind small C) Tj ET
+BT /F1 9.80 Tf 54.00 589.80 Td (interfaces:) Tj ET
+BT /F1 9.60 Tf 62.00 572.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 572.60 Td (PCM byte calculations and frame splitting.) Tj ET
+BT /F1 9.60 Tf 62.00 560.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 560.60 Td (WAV PCM header build and parse helpers.) Tj ET
+BT /F1 9.60 Tf 62.00 548.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 548.60 Td (MP3 and Opus decoder interface examples.) Tj ET
+BT /F1 9.60 Tf 62.00 536.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 536.60 Td (ALSA/tinyalsa device state interface example.) Tj ET
+BT /F1 9.60 Tf 62.00 524.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 524.60 Td (Energy-based VAD example.) Tj ET
+BT /F1 9.60 Tf 62.00 512.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 512.60 Td (Voice processing mock.) Tj ET
+BT /F1 9.60 Tf 62.00 500.60 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 500.60 Td (UniSound ASR session lifecycle mock.) Tj ET
+BT /F2 12.00 Tf 54.00 478.60 Td (Files) Tj ET
+BT /F3 8.30 Tf 70.00 458.60 Td (audio_speech_processing/include/audio_interfaces.h) Tj ET
+BT /F3 8.30 Tf 70.00 448.80 Td (audio_speech_processing/source/audio_pcm_format.c) Tj ET
+BT /F3 8.30 Tf 70.00 439.00 Td (audio_speech_processing/source/audio_wav_format.c) Tj ET
+BT /F3 8.30 Tf 70.00 429.20 Td (audio_speech_processing/source/audio_mp3_format.c) Tj ET
+BT /F3 8.30 Tf 70.00 419.40 Td (audio_speech_processing/source/audio_opus_format.c) Tj ET
+BT /F3 8.30 Tf 70.00 409.60 Td (audio_speech_processing/source/audio_alsa_device.c) Tj ET
+BT /F3 8.30 Tf 70.00 399.80 Td (audio_speech_processing/source/audio_vad_voice.c) Tj ET
+BT /F3 8.30 Tf 70.00 390.00 Td (audio_speech_processing/source/audio_unisound_asr.c) Tj ET
+BT /F3 8.30 Tf 70.00 380.20 Td (audio_speech_processing/tests/test_audio_interfaces.c) Tj ET
+BT /F2 12.00 Tf 54.00 354.40 Td (Main Data Structures) Tj ET
+BT /F2 9.40 Tf 62.00 337.40 Td (struct audio_pcm_format) Tj ET
+BT /F1 9.40 Tf 78.00 325.60 Td (Describes sample rate, channel count, and bits per sample.) Tj ET
+BT /F2 9.40 Tf 62.00 310.80 Td (struct audio_pcm_split_state) Tj ET
+BT /F1 9.40 Tf 78.00 299.00 Td (Stores remaining bytes that did not fill a complete 640-byte UniSound feed chunk.) Tj ET
+BT /F2 9.40 Tf 62.00 284.20 Td (struct audio_wav_header) Tj ET
+BT /F1 9.40 Tf 78.00 272.40 Td (Models a basic 44-byte PCM WAV header.) Tj ET
+BT /F2 9.40 Tf 62.00 257.60 Td (struct audio_mp3_decoder) Tj ET
+BT /F1 9.40 Tf 78.00 245.80 Td (Stores mock MP3 decoder state, sample rate, and channels.) Tj ET
+BT /F2 9.40 Tf 62.00 231.00 Td (struct audio_opus_decoder) Tj ET
+BT /F1 9.40 Tf 78.00 219.20 Td (Stores mock Opus decoder state, sample rate, and channels.) Tj ET
+BT /F2 9.40 Tf 62.00 204.40 Td (struct audio_alsa_device) Tj ET
+BT /F1 9.40 Tf 78.00 192.60 Td (Stores mock ALSA device name, mode, PCM format, and started state.) Tj ET
+BT /F2 9.40 Tf 62.00 177.80 Td (struct audio_vad_state) Tj ET
+BT /F1 9.40 Tf 78.00 166.00 Td (Stores speech active state, start and end thresholds, silence frame limit, and current silence) Tj ET
+BT /F1 9.40 Tf 78.00 154.20 Td (count.) Tj ET
+BT /F2 9.40 Tf 62.00 139.40 Td (struct audio_unisound_session) Tj ET
+BT /F1 9.40 Tf 78.00 127.60 Td (Stores mock UniSound session state, credentials, fed byte count, and recognition result.) Tj ET
+BT /F2 12.00 Tf 54.00 102.80 Td (API Reference) Tj ET
+BT /F2 9.40 Tf 62.00 85.80 Td (audio_pcm_bytes_per_sample\(format\)) Tj ET
+BT /F1 9.40 Tf 78.00 74.00 Td (Returns the byte width for one PCM sample in one channel. For 16-bit PCM this returns 2.) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 4) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 4780 >>
+stream
+BT /F2 9.40 Tf 62.00 738.00 Td (audio_pcm_frame_bytes\(format, sample_count\)) Tj ET
+BT /F1 9.40 Tf 78.00 726.20 Td (Returns sample_count * channels * bytes_per_sample.) Tj ET
+BT /F2 9.40 Tf 62.00 711.40 Td (audio_pcm_split_to_640\(state, input, input_length, chunk_func, user_data\)) Tj ET
+BT /F1 9.40 Tf 78.00 699.60 Td (Combines previous rest bytes with new input, emits full 640-byte chunks through the callback, and) Tj ET
+BT /F1 9.40 Tf 78.00 687.80 Td (stores trailing bytes for the next call. This matches the legacy UniSound feed pattern.) Tj ET
+BT /F2 9.40 Tf 62.00 673.00 Td (audio_pcm_12mic_to_float\(input, voice_out, aec_out, mic_count, sample_count\)) Tj ET
+BT /F1 9.40 Tf 78.00 661.20 Td (Converts interleaved 12-microphone short samples into normalized float buffers for voice and AEC) Tj ET
+BT /F1 9.40 Tf 78.00 649.40 Td (style processing.) Tj ET
+BT /F2 9.40 Tf 62.00 634.60 Td (audio_wav_build_header\(header, format, pcm_bytes\)) Tj ET
+BT /F1 9.40 Tf 78.00 622.80 Td (Builds a basic RIFF/WAVE PCM header and calculates byte rate, block align, file size, and data) Tj ET
+BT /F1 9.40 Tf 78.00 611.00 Td (size.) Tj ET
+BT /F2 9.40 Tf 62.00 596.20 Td (audio_wav_parse_format\(header, format, pcm_bytes\)) Tj ET
+BT /F1 9.40 Tf 78.00 584.40 Td (Validates a basic WAV PCM header and extracts sample rate, channels, bit depth, and PCM byte) Tj ET
+BT /F1 9.40 Tf 78.00 572.60 Td (count.) Tj ET
+BT /F2 9.40 Tf 62.00 557.80 Td (audio_mp3_decoder_open\(decoder, sample_rate, channels\)) Tj ET
+BT /F1 9.40 Tf 78.00 546.00 Td (Initializes a mock MP3 decoder state.) Tj ET
+BT /F2 9.40 Tf 62.00 531.20 Td (audio_mp3_decode_mock\(decoder, mp3_data, mp3_length, pcm_out, pcm_capacity\)) Tj ET
+BT /F1 9.40 Tf 78.00 519.40 Td (Validates input and writes deterministic mock PCM samples. It does not call libmad or another real) Tj ET
+BT /F1 9.40 Tf 78.00 507.60 Td (MP3 decoder.) Tj ET
+BT /F2 9.40 Tf 62.00 492.80 Td (audio_mp3_decoder_close\(decoder\)) Tj ET
+BT /F1 9.40 Tf 78.00 481.00 Td (Clears mock MP3 decoder state.) Tj ET
+BT /F2 9.40 Tf 62.00 466.20 Td (audio_opus_decoder_open\(decoder, sample_rate, channels\)) Tj ET
+BT /F1 9.40 Tf 78.00 454.40 Td (Initializes a mock Opus decoder state.) Tj ET
+BT /F2 9.40 Tf 62.00 439.60 Td (audio_opus_decode_mock\(decoder, packet, packet_length, pcm_out, max_samples\)) Tj ET
+BT /F1 9.40 Tf 78.00 427.80 Td (Validates input and writes deterministic mock PCM samples. It does not call libopus.) Tj ET
+BT /F2 9.40 Tf 62.00 413.00 Td (audio_opus_decoder_close\(decoder\)) Tj ET
+BT /F1 9.40 Tf 78.00 401.20 Td (Clears mock Opus decoder state.) Tj ET
+BT /F2 9.40 Tf 62.00 386.40 Td (audio_alsa_open_example\(device, device_name, mode, format\)) Tj ET
+BT /F1 9.40 Tf 78.00 374.60 Td (Initializes mock ALSA/tinyalsa device state for record or playback mode.) Tj ET
+BT /F2 9.40 Tf 62.00 359.80 Td (audio_alsa_start_example\(device\)) Tj ET
+BT /F1 9.40 Tf 78.00 348.00 Td (Marks the mock device as started.) Tj ET
+BT /F2 9.40 Tf 62.00 333.20 Td (audio_alsa_stop_example\(device\)) Tj ET
+BT /F1 9.40 Tf 78.00 321.40 Td (Marks the mock device as stopped.) Tj ET
+BT /F2 9.40 Tf 62.00 306.60 Td (audio_vad_init\(state, start_score, end_score, end_frame_count\)) Tj ET
+BT /F1 9.40 Tf 78.00 294.80 Td (Initializes the energy-based VAD state.) Tj ET
+BT /F2 9.40 Tf 62.00 280.00 Td (audio_vad_feed_pcm\(state, pcm, sample_count\)) Tj ET
+BT /F1 9.40 Tf 78.00 268.20 Td (Computes average absolute PCM energy. Returns silence, speech, or end-of-speech according to) Tj ET
+BT /F1 9.40 Tf 78.00 256.40 Td (configured thresholds.) Tj ET
+BT /F2 9.40 Tf 62.00 241.60 Td (audio_voice_process_mock\(input, output, sample_count, gain\)) Tj ET
+BT /F1 9.40 Tf 78.00 229.80 Td (Converts normalized float samples to 16-bit PCM with gain and clipping.) Tj ET
+BT /F2 9.40 Tf 62.00 215.00 Td (audio_unisound_init_example\(session, app_key, secret_key\)) Tj ET
+BT /F1 9.40 Tf 78.00 203.20 Td (Initializes a mock UniSound ASR session and stores credentials in the session object.) Tj ET
+BT /F2 9.40 Tf 62.00 188.40 Td (audio_unisound_start_example\(session\)) Tj ET
+BT /F1 9.40 Tf 78.00 176.60 Td (Marks the mock recognizer as started.) Tj ET
+BT /F2 9.40 Tf 62.00 161.80 Td (audio_unisound_feed_example\(session, pcm, pcm_length\)) Tj ET
+BT /F1 9.40 Tf 78.00 150.00 Td (Adds PCM bytes to the mock recognizer input count.) Tj ET
+BT /F2 9.40 Tf 62.00 135.20 Td (audio_unisound_stop_example\(session\)) Tj ET
+BT /F1 9.40 Tf 78.00 123.40 Td (Stops the mock recognizer and produces a deterministic mock recognition result.) Tj ET
+BT /F2 9.40 Tf 62.00 108.60 Td (audio_unisound_get_result_example\(session\)) Tj ET
+BT /F1 9.40 Tf 78.00 96.80 Td (Returns the mock recognition result string.) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 5) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 17 0 R >>
+endobj
+17 0 obj
+<< /Length 4260 >>
+stream
+BT /F2 12.00 Tf 54.00 728.00 Td (Audio Stack Mapping) Tj ET
+BT /F1 9.80 Tf 54.00 711.00 Td (The module maps legacy technology names into isolated interfaces:) Tj ET
+BT /F3 8.30 Tf 70.00 690.80 Td (ALSA/tinyalsa -> record and playback device layer) Tj ET
+BT /F3 8.30 Tf 70.00 681.00 Td (Voice SDK     -> microphone array preprocessing) Tj ET
+BT /F3 8.30 Tf 70.00 671.20 Td (Huwen VAD     -> speech start/end detection) Tj ET
+BT /F3 8.30 Tf 70.00 661.40 Td (Opus          -> compressed network audio) Tj ET
+BT /F3 8.30 Tf 70.00 651.60 Td (PCM           -> recognition input format) Tj ET
+BT /F3 8.30 Tf 70.00 641.80 Td (UniSound SDK  -> ASR recognition) Tj ET
+BT /F3 8.30 Tf 70.00 632.00 Td (MP3/libmad    -> TTS or music playback decode) Tj ET
+BT /F2 12.00 Tf 54.00 606.20 Td (Implementation Notes) Tj ET
+BT /F1 9.80 Tf 54.00 589.20 Td (This module deliberately avoids linking real external audio libraries in the tests. The mock) Tj ET
+BT /F1 9.80 Tf 54.00 577.00 Td (interfaces allow the code to compile and verify lifecycle, buffer, and routing logic without SDK) Tj ET
+BT /F1 9.80 Tf 54.00 564.80 Td (or hardware dependencies.) Tj ET
+BT /F1 9.80 Tf 54.00 547.60 Td (Production replacement points are clear: replace the mock MP3, Opus, ALSA, Voice, VAD, and) Tj ET
+BT /F1 9.80 Tf 54.00 535.40 Td (UniSound implementations with adapters around the real libraries while preserving the public) Tj ET
+BT /F1 9.80 Tf 54.00 523.20 Td (interface shape where useful.) Tj ET
+BT /F2 15.00 Tf 54.00 490.00 Td (business_interaction Module) Tj ET
+BT /F2 12.00 Tf 54.00 458.00 Td (Responsibility) Tj ET
+BT /F1 9.80 Tf 54.00 441.00 Td (The business_interaction module captures the network and command layer:) Tj ET
+BT /F1 9.60 Tf 62.00 423.80 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 423.80 Td (Binary post_content packet packing, unpacking, and validation.) Tj ET
+BT /F1 9.60 Tf 62.00 411.80 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 411.80 Td (HTTP GET and POST request text builders.) Tj ET
+BT /F1 9.60 Tf 62.00 399.80 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 399.80 Td (Baidu TTS style HTTP request generation.) Tj ET
+BT /F1 9.60 Tf 62.00 387.80 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 387.80 Td (Lightweight JSON string extraction.) Tj ET
+BT /F1 9.60 Tf 62.00 375.80 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 375.80 Td (Command JSON routing to media, TTS, music, and volume actions.) Tj ET
+BT /F2 12.00 Tf 54.00 353.80 Td (Files) Tj ET
+BT /F3 8.30 Tf 70.00 333.80 Td (business_interaction/include/business_interfaces.h) Tj ET
+BT /F3 8.30 Tf 70.00 324.00 Td (business_interaction/source/business_protocol.c) Tj ET
+BT /F3 8.30 Tf 70.00 314.20 Td (business_interaction/source/business_http.c) Tj ET
+BT /F3 8.30 Tf 70.00 304.40 Td (business_interaction/source/business_json.c) Tj ET
+BT /F3 8.30 Tf 70.00 294.60 Td (business_interaction/source/business_command.c) Tj ET
+BT /F3 8.30 Tf 70.00 284.80 Td (business_interaction/tests/test_business_interfaces.c) Tj ET
+BT /F2 12.00 Tf 54.00 259.00 Td (Main Data Structures) Tj ET
+BT /F2 9.40 Tf 62.00 242.00 Td (struct business_post_content) Tj ET
+BT /F1 9.40 Tf 78.00 230.20 Td (Represents the binary packet exchanged between client and speech server. It contains contType,) Tj ET
+BT /F1 9.40 Tf 78.00 218.40 Td (contLength, and a fixed 2048-byte payload buffer.) Tj ET
+BT /F2 9.40 Tf 62.00 203.60 Td (struct business_http_request) Tj ET
+BT /F1 9.40 Tf 78.00 191.80 Td (Stores host, port, and generated HTTP request text.) Tj ET
+BT /F2 9.40 Tf 62.00 177.00 Td (struct business_command_result) Tj ET
+BT /F1 9.40 Tf 78.00 165.20 Td (Stores parsed command action, text payload, and optional media URL.) Tj ET
+BT /F2 12.00 Tf 54.00 140.40 Td (API Reference) Tj ET
+BT /F2 9.40 Tf 62.00 123.40 Td (business_protocol_pack\(packet, cont_type, payload, payload_length\)) Tj ET
+BT /F1 9.40 Tf 78.00 111.60 Td (Validates packet type and length, clears the packet, stores type and length, and copies payload) Tj ET
+BT /F1 9.40 Tf 78.00 99.80 Td (bytes.) Tj ET
+BT /F2 9.40 Tf 62.00 85.00 Td (business_protocol_unpack\(packet, cont_type, out, out_size\)) Tj ET
+BT /F1 9.40 Tf 78.00 73.20 Td (Validates the packet and copies payload bytes to the caller buffer. Returns copied payload length.) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 6) Tj ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 19 0 R >>
+endobj
+19 0 obj
+<< /Length 4610 >>
+stream
+BT /F2 9.40 Tf 62.00 738.00 Td (business_protocol_validate\(packet\)) Tj ET
+BT /F1 9.40 Tf 78.00 726.20 Td (Checks that packet type is start, data, or stop and that payload length fits the fixed buffer.) Tj ET
+BT /F2 9.40 Tf 62.00 711.40 Td (business_http_build_get\(request, host, path\)) Tj ET
+BT /F1 9.40 Tf 78.00 699.60 Td (Builds a simple HTTP/1.0 GET request string.) Tj ET
+BT /F2 9.40 Tf 62.00 684.80 Td (business_http_build_post\(request, host, path, body\)) Tj ET
+BT /F1 9.40 Tf 78.00 673.00 Td (Builds a simple HTTP/1.0 POST request string with Content-Length.) Tj ET
+BT /F2 9.40 Tf 62.00 658.20 Td (business_http_build_baidu_tts\(request, text\)) Tj ET
+BT /F1 9.40 Tf 78.00 646.40 Td (URL-encodes text for the supported subset and builds a Baidu text2audio style GET request.) Tj ET
+BT /F2 9.40 Tf 62.00 631.60 Td (business_json_get_string\(json, key, out, out_size\)) Tj ET
+BT /F1 9.40 Tf 78.00 619.80 Td (Extracts a simple JSON string value by key using lightweight string scanning.) Tj ET
+BT /F2 9.40 Tf 62.00 605.00 Td (business_json_has_token\(json, token\)) Tj ET
+BT /F1 9.40 Tf 78.00 593.20 Td (Returns nonzero when the JSON text contains the requested token.) Tj ET
+BT /F2 9.40 Tf 62.00 578.40 Td (business_command_parse_json\(json, result\)) Tj ET
+BT /F1 9.40 Tf 78.00 566.60 Td (Routes recognized JSON snippets to one of the BUSINESS_ACTION values.) Tj ET
+BT /F2 12.00 Tf 54.00 541.80 Td (Command Routing) Tj ET
+BT /F1 9.80 Tf 54.00 524.80 Td (The command parser maps response content to action constants:) Tj ET
+BT /F3 8.30 Tf 70.00 504.60 Td (resultMusic or songUrl       -> BUSINESS_ACTION_MUSIC_PLAY) Tj ET
+BT /F3 8.30 Tf 70.00 494.80 Td ("cmdType":"chat" or chatAnswer -> BUSINESS_ACTION_CHAT_TTS) Tj ET
+BT /F3 8.30 Tf 70.00 485.00 Td (mediaPause                   -> BUSINESS_ACTION_MEDIA_PAUSE) Tj ET
+BT /F3 8.30 Tf 70.00 475.20 Td (mediaResume                  -> BUSINESS_ACTION_MEDIA_RESUME) Tj ET
+BT /F3 8.30 Tf 70.00 465.40 Td (mediaStop                    -> BUSINESS_ACTION_MEDIA_STOP) Tj ET
+BT /F3 8.30 Tf 70.00 455.60 Td (mediaVolumeIncrease          -> BUSINESS_ACTION_VOLUME_UP) Tj ET
+BT /F3 8.30 Tf 70.00 445.80 Td (mediaVolumeDecrease          -> BUSINESS_ACTION_VOLUME_DOWN) Tj ET
+BT /F3 8.30 Tf 70.00 436.00 Td (unknown command              -> BUSINESS_ACTION_NONE) Tj ET
+BT /F2 12.00 Tf 54.00 410.20 Td (Implementation Notes) Tj ET
+BT /F1 9.80 Tf 54.00 393.20 Td (The JSON extraction is intentionally lightweight. It is suitable for small examples and) Tj ET
+BT /F1 9.80 Tf 54.00 381.00 Td (deterministic unit tests, but production code should use a real JSON parser such as cJSON or) Tj ET
+BT /F1 9.80 Tf 54.00 368.80 Td (another structured parser. A real parser is needed for escaped characters, nested objects, arrays,) Tj ET
+BT /F1 9.80 Tf 54.00 356.60 Td (numbers, booleans, null values, malformed input handling, and security hardening.) Tj ET
+BT /F2 15.00 Tf 54.00 323.40 Td (End-to-End Integration Pattern) Tj ET
+BT /F1 9.80 Tf 54.00 301.40 Td (A complete application built on the concepts in this folder would normally connect the modules in) Tj ET
+BT /F1 9.80 Tf 54.00 289.20 Td (this sequence:) Tj ET
+BT /F3 8.30 Tf 70.00 269.00 Td (1. Start infrastructure:) Tj ET
+BT /F3 8.30 Tf 70.00 259.20 Td (   - configure logging) Tj ET
+BT /F3 8.30 Tf 70.00 249.40 Td (   - start process monitor) Tj ET
+BT /F3 8.30 Tf 70.00 239.60 Td (   - open TCP or UDP server/client sockets) Tj ET
+BT /F3 8.30 Tf 70.00 229.80 Td () Tj ET
+BT /F3 8.30 Tf 70.00 220.00 Td (2. Start audio path:) Tj ET
+BT /F3 8.30 Tf 70.00 210.20 Td (   - open ALSA/tinyalsa record device) Tj ET
+BT /F3 8.30 Tf 70.00 200.40 Td (   - initialize voice processing and VAD) Tj ET
+BT /F3 8.30 Tf 70.00 190.60 Td (   - initialize ASR session) Tj ET
+BT /F3 8.30 Tf 70.00 180.80 Td () Tj ET
+BT /F3 8.30 Tf 70.00 171.00 Td (3. Capture and detect speech:) Tj ET
+BT /F3 8.30 Tf 70.00 161.20 Td (   - read PCM frames from microphone) Tj ET
+BT /F3 8.30 Tf 70.00 151.40 Td (   - convert microphone array samples if needed) Tj ET
+BT /F3 8.30 Tf 70.00 141.60 Td (   - feed VAD) Tj ET
+BT /F3 8.30 Tf 70.00 131.80 Td (   - begin packet transfer when speech starts) Tj ET
+BT /F3 8.30 Tf 70.00 122.00 Td () Tj ET
+BT /F3 8.30 Tf 70.00 112.20 Td (4. Transfer recognition audio:) Tj ET
+BT /F3 8.30 Tf 70.00 102.40 Td (   - split PCM into required chunk sizes) Tj ET
+BT /F3 8.30 Tf 70.00 92.60 Td (   - pack start/data/stop packets) Tj ET
+BT /F3 8.30 Tf 70.00 82.80 Td (   - send packets over TCP) Tj ET
+BT /F3 8.30 Tf 70.00 73.00 Td () Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 7) Tj ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 21 0 R >>
+endobj
+21 0 obj
+<< /Length 4654 >>
+stream
+BT /F3 8.30 Tf 70.00 738.00 Td (5. Recognize and route text:) Tj ET
+BT /F3 8.30 Tf 70.00 728.20 Td (   - feed PCM into ASR) Tj ET
+BT /F3 8.30 Tf 70.00 718.40 Td (   - stop ASR and read recognized text) Tj ET
+BT /F3 8.30 Tf 70.00 708.60 Td (   - send text to command server) Tj ET
+BT /F3 8.30 Tf 70.00 698.80 Td (   - parse JSON response) Tj ET
+BT /F3 8.30 Tf 70.00 689.00 Td () Tj ET
+BT /F3 8.30 Tf 70.00 679.20 Td (6. Execute response:) Tj ET
+BT /F3 8.30 Tf 70.00 669.40 Td (   - chat answer -> TTS) Tj ET
+BT /F3 8.30 Tf 70.00 659.60 Td (   - music result -> play URL) Tj ET
+BT /F3 8.30 Tf 70.00 649.80 Td (   - media control -> pause/resume/stop) Tj ET
+BT /F3 8.30 Tf 70.00 640.00 Td (   - volume command -> adjust output volume) Tj ET
+BT /F3 8.30 Tf 70.00 630.20 Td () Tj ET
+BT /F3 8.30 Tf 70.00 620.40 Td (7. Playback:) Tj ET
+BT /F3 8.30 Tf 70.00 610.60 Td (   - decode MP3 or other stream when needed) Tj ET
+BT /F3 8.30 Tf 70.00 600.80 Td (   - send PCM to ALSA/tinyalsa playback device) Tj ET
+BT /F2 15.00 Tf 54.00 569.00 Td (Example Pseudocode) Tj ET
+BT /F1 9.80 Tf 54.00 547.00 Td (The following pseudocode shows how the interface concepts fit together. It is not a complete) Tj ET
+BT /F1 9.80 Tf 54.00 534.80 Td (source file.) Tj ET
+BT /F3 8.30 Tf 70.00 514.60 Td (struct audio_vad_state vad;) Tj ET
+BT /F3 8.30 Tf 70.00 504.80 Td (struct audio_unisound_session asr;) Tj ET
+BT /F3 8.30 Tf 70.00 495.00 Td (struct business_post_content packet;) Tj ET
+BT /F3 8.30 Tf 70.00 485.20 Td (struct business_command_result command;) Tj ET
+BT /F3 8.30 Tf 70.00 475.40 Td () Tj ET
+BT /F3 8.30 Tf 70.00 465.60 Td (audio_vad_init\(&vad, 0.10f, 0.04f, 3\);) Tj ET
+BT /F3 8.30 Tf 70.00 455.80 Td (audio_unisound_init_example\(&asr, "app-key", "secret-key"\);) Tj ET
+BT /F3 8.30 Tf 70.00 446.00 Td (audio_unisound_start_example\(&asr\);) Tj ET
+BT /F3 8.30 Tf 70.00 436.20 Td () Tj ET
+BT /F3 8.30 Tf 70.00 426.40 Td (while \(recording\) {) Tj ET
+BT /F3 8.30 Tf 70.00 416.60 Td (    read_pcm_frame\(pcm, sample_count\);) Tj ET
+BT /F3 8.30 Tf 70.00 406.80 Td () Tj ET
+BT /F3 8.30 Tf 70.00 397.00 Td (    vad_state = audio_vad_feed_pcm\(&vad, pcm, sample_count\);) Tj ET
+BT /F3 8.30 Tf 70.00 387.20 Td (    if \(vad_state == AUDIO_VAD_SPEECH\) {) Tj ET
+BT /F3 8.30 Tf 70.00 377.40 Td (        business_protocol_pack\(&packet,) Tj ET
+BT /F3 8.30 Tf 70.00 367.60 Td (                               BUSINESS_CONT_DATA,) Tj ET
+BT /F3 8.30 Tf 70.00 357.80 Td (                               \(const char *\)pcm,) Tj ET
+BT /F3 8.30 Tf 70.00 348.00 Td (                               pcm_bytes\);) Tj ET
+BT /F3 8.30 Tf 70.00 338.20 Td (        send_packet\(packet\);) Tj ET
+BT /F3 8.30 Tf 70.00 328.40 Td (        audio_unisound_feed_example\(&asr, \(const char *\)pcm, pcm_bytes\);) Tj ET
+BT /F3 8.30 Tf 70.00 318.60 Td (    }) Tj ET
+BT /F3 8.30 Tf 70.00 308.80 Td () Tj ET
+BT /F3 8.30 Tf 70.00 299.00 Td (    if \(vad_state == AUDIO_VAD_END\) {) Tj ET
+BT /F3 8.30 Tf 70.00 289.20 Td (        audio_unisound_stop_example\(&asr\);) Tj ET
+BT /F3 8.30 Tf 70.00 279.40 Td (        text = audio_unisound_get_result_example\(&asr\);) Tj ET
+BT /F3 8.30 Tf 70.00 269.60 Td (        json = request_command_server\(text\);) Tj ET
+BT /F3 8.30 Tf 70.00 259.80 Td (        business_command_parse_json\(json, &command\);) Tj ET
+BT /F3 8.30 Tf 70.00 250.00 Td (        execute_command\(command\);) Tj ET
+BT /F3 8.30 Tf 70.00 240.20 Td (        break;) Tj ET
+BT /F3 8.30 Tf 70.00 230.40 Td (    }) Tj ET
+BT /F3 8.30 Tf 70.00 220.60 Td (}) Tj ET
+BT /F2 15.00 Tf 54.00 188.80 Td (Known Limitations) Tj ET
+BT /F1 9.80 Tf 54.00 166.80 Td (This folder is useful as a component summary and test harness, but it should not be treated as) Tj ET
+BT /F1 9.80 Tf 54.00 154.60 Td (production-ready without additional work.) Tj ET
+BT /F1 9.60 Tf 62.00 137.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 137.40 Td (The audio SDK integrations are mocks or examples, not real hardware/codec/ASR integrations.) Tj ET
+BT /F1 9.60 Tf 62.00 125.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 125.40 Td (The JSON parser is string-scanning only and is not safe for general JSON input.) Tj ET
+BT /F1 9.60 Tf 62.00 113.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 113.40 Td (HTTP request builders generate request text but do not implement a complete HTTP client.) Tj ET
+BT /F1 9.60 Tf 62.00 101.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 101.40 Td (Socket helpers are basic blocking examples.) Tj ET
+BT /F1 9.60 Tf 62.00 89.40 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 89.40 Td (Fixed-size buffers simplify tests but require careful bounds management in production.) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 8) Tj ET
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 23 0 R >>
+endobj
+23 0 obj
+<< /Length 3894 >>
+stream
+BT /F1 9.60 Tf 62.00 738.00 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 738.00 Td (The manual protocol uses simple integer fields and does not define byte order, framing across) Tj ET
+BT /F1 9.60 Tf 78.00 726.00 Td (architectures, or version negotiation.) Tj ET
+BT /F1 9.60 Tf 62.00 714.00 Td (-) Tj ET
+BT /F1 9.60 Tf 78.00 714.00 Td (Security features such as TLS, authentication, input sanitization, and robust error recovery are) Tj ET
+BT /F1 9.60 Tf 78.00 702.00 Td (out of scope.) Tj ET
+BT /F2 15.00 Tf 54.00 674.00 Td (Recommended Production Hardening) Tj ET
+BT /F1 9.80 Tf 54.00 652.00 Td (If this component model is promoted into a real product, prioritize the following changes:) Tj ET
+BT /F2 9.40 Tf 62.00 634.80 Td (1.) Tj ET
+BT /F1 9.40 Tf 78.00 623.00 Td (Replace mock SDK code with adapters around the real ALSA/tinyalsa, Opus, MP3, Voice/VAD, and) Tj ET
+BT /F1 9.40 Tf 78.00 611.20 Td (UniSound APIs.) Tj ET
+BT /F2 9.40 Tf 62.00 596.40 Td (2.) Tj ET
+BT /F1 9.40 Tf 78.00 584.60 Td (Replace lightweight JSON scanning with a structured parser.) Tj ET
+BT /F2 9.40 Tf 62.00 569.80 Td (3.) Tj ET
+BT /F1 9.40 Tf 78.00 558.00 Td (Define a stable wire protocol: byte order, packet framing, version, checksum or length validation,) Tj ET
+BT /F1 9.40 Tf 78.00 546.20 Td (and error responses.) Tj ET
+BT /F2 9.40 Tf 62.00 531.40 Td (4.) Tj ET
+BT /F1 9.40 Tf 78.00 519.60 Td (Add timeout, retry, reconnect, and partial-read/partial-write handling for network code.) Tj ET
+BT /F2 9.40 Tf 62.00 504.80 Td (5.) Tj ET
+BT /F1 9.40 Tf 78.00 493.00 Td (Add structured logs and real log rotation.) Tj ET
+BT /F2 9.40 Tf 62.00 478.20 Td (6.) Tj ET
+BT /F1 9.40 Tf 78.00 466.40 Td (Move secrets such as ASR app keys out of source and into secure configuration.) Tj ET
+BT /F2 9.40 Tf 62.00 451.60 Td (7.) Tj ET
+BT /F1 9.40 Tf 78.00 439.80 Td (Add integration tests with real or simulated audio streams.) Tj ET
+BT /F2 9.40 Tf 62.00 425.00 Td (8.) Tj ET
+BT /F1 9.40 Tf 78.00 413.20 Td (Add sanitizers, static analysis, and CI build targets for the supported platforms.) Tj ET
+BT /F2 15.00 Tf 54.00 382.40 Td (Quick Reference) Tj ET
+BT /F1 9.80 Tf 54.00 360.40 Td (Module responsibility summary:) Tj ET
+BT /F3 8.30 Tf 70.00 340.20 Td (core_engineering) Tj ET
+BT /F3 8.30 Tf 70.00 330.40 Td (  socket, thread, log, process monitor) Tj ET
+BT /F3 8.30 Tf 70.00 320.60 Td () Tj ET
+BT /F3 8.30 Tf 70.00 310.80 Td (audio_speech_processing) Tj ET
+BT /F3 8.30 Tf 70.00 301.00 Td (  PCM, WAV, MP3, Opus, ALSA, VAD, Voice, UniSound ASR) Tj ET
+BT /F3 8.30 Tf 70.00 291.20 Td () Tj ET
+BT /F3 8.30 Tf 70.00 281.40 Td (business_interaction) Tj ET
+BT /F3 8.30 Tf 70.00 271.60 Td (  post_content protocol, HTTP request, JSON parsing, command routing) Tj ET
+BT /F1 9.80 Tf 54.00 255.80 Td (Common constants:) Tj ET
+BT /F3 8.30 Tf 70.00 235.60 Td (CORE_OK / AUDIO_OK / BUSINESS_OK       = 0) Tj ET
+BT /F3 8.30 Tf 70.00 225.80 Td (CORE_ERROR / AUDIO_ERROR / BUSINESS_ERROR = -1) Tj ET
+BT /F3 8.30 Tf 70.00 216.00 Td (AUDIO_UNISOUND_CHUNK                   = 640) Tj ET
+BT /F3 8.30 Tf 70.00 206.20 Td (AUDIO_PCM_BLOCK                        = 2048) Tj ET
+BT /F3 8.30 Tf 70.00 196.40 Td (BUSINESS_POST_BUFF                     = 2048) Tj ET
+BT /F3 8.30 Tf 70.00 186.60 Td (BUSINESS_CONT_START                    = 1) Tj ET
+BT /F3 8.30 Tf 70.00 176.80 Td (BUSINESS_CONT_DATA                     = 2) Tj ET
+BT /F3 8.30 Tf 70.00 167.00 Td (BUSINESS_CONT_STOP                     = 3) Tj ET
+BT /F2 15.00 Tf 54.00 135.20 Td (Maintenance Notes) Tj ET
+BT /F1 9.80 Tf 54.00 113.20 Td (Keep headers as the public contract for each module. When changing behavior, update the relevant) Tj ET
+BT /F1 9.80 Tf 54.00 101.00 Td (interface header, source implementation, unit test, architecture overview, and this manual) Tj ET
+BT /F1 9.80 Tf 54.00 88.80 Td (together.) Tj ET
+BT /F1 8.00 Tf 210.00 30.00 Td (summary_components Module Manual - Page 9) Tj ET
+endstream
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000176 00000 n 
+0000000246 00000 n 
+0000000321 00000 n 
+0000000389 00000 n 
+0000000535 00000 n 
+0000004444 00000 n 
+0000004590 00000 n 
+0000008564 00000 n 
+0000008712 00000 n 
+0000013016 00000 n 
+0000013164 00000 n 
+0000017593 00000 n 
+0000017741 00000 n 
+0000022574 00000 n 
+0000022722 00000 n 
+0000027035 00000 n 
+0000027183 00000 n 
+0000031846 00000 n 
+0000031994 00000 n 
+0000036701 00000 n 
+0000036849 00000 n 
+trailer
+<< /Size 24 /Root 1 0 R >>
+startxref
+40796
+%%EOF
