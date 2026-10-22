@@ -1,16 +1,10 @@
-.PHONY: all test clean core audio business
-all: core audio business
-core:
-	$(MAKE) -C S001_OperatingSystem/linux/core_engineering
-audio:
-	$(MAKE) -C S007_Library/audio_speech_processing
-business:
-	$(MAKE) -C S007_Library/business_interaction
+.PHONY: test test-media demo
+
 test:
-	$(MAKE) -C S001_OperatingSystem/linux/core_engineering run
-	$(MAKE) -C S007_Library/audio_speech_processing run
-	$(MAKE) -C S007_Library/business_interaction run
-clean:
-	$(MAKE) -C S001_OperatingSystem/linux/core_engineering clean
-	$(MAKE) -C S007_Library/audio_speech_processing clean
-	$(MAKE) -C S007_Library/business_interaction clean
+	python3 tools/check_handbook.py
+
+test-media:
+	python3 tools/check_handbook.py --media
+
+demo:
+	python3 examples/pcm-read-write/pcm_demo.py --output /tmp/pcm-demo
