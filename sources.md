@@ -8,7 +8,7 @@
 
 | 原组件 | 判断 | 当前处理 |
 | --- | --- | --- |
-| core_thread_example.c | 正常生命周期下的互斥计数器可用于教学 | 源文件原样复用到 examples/native；裁剪头文件，新增双线程驱动 |
+| core_thread_example.c | 正常生命周期下的互斥计数器可用于教学 | 最初曾复用；2026-10-26 已移除复用文件，改为独立新写 threads.c |
 | core_socket_example.c | 不足以展示完整消息边界、长度上限与截断处理 | 新写本地 TCP 示例 |
 | audio_pcm_format.c | 分块函数跨多次短输入时有尾部丢失风险；多通道索引硬编码 | 保留新 PCM 示例，补充显式通道提取与边界测试 |
 | audio_wav_format.c | 内存结构模型不能直接作为通用可移植 WAV 文件读写器 | 用 Python wave 新实现容器往返 |
@@ -21,7 +21,11 @@
 | 日志/监控/自有业务协议 | 属于确认的暂缓或合并项 | 不恢复旧组件；通用知识并入相关技术页 |
 | 其余本轮技术 | 没有适用组件 | 为手册新写，按依赖与验证状态分类 |
 
-复用的线程源码来自备份路径 `S001_OperatingSystem/linux/core_engineering/source/core_thread_example.c`。它原属 `summary_components/core_engineering`。教学假设和错误处理限制见 pthread 条目。
+## 2019Codes / SkEgn SDK 扫描
+
+本轮读取 `Coding_0001_HistoryTree/2019Codes/sdk_2.0.x_8_29`。SkEgn 的 C 头文件、C/Java/Python/C#/LuaJIT 演示和 Makefile 提供了实际调用与构建证据；第三方 Opus、cJSON、Mongoose、OpenSSL 源码只作为依赖关系核对，不复制到手册示例。历史演示中的凭证、provision 文件和服务地址不作为文档配置。
+
+历史版本曾从 summary_components 备份复用线程组件；当前已改写为独立示例，不再依赖或引用该组件。
 
 ## 验证范围
 
@@ -32,3 +36,12 @@
 S001～S010 分类目录及八个子模块已移出工作树。删除前的快照为 `../DevelopingManual-backups/before-handbook-20261021.tar.gz`，包含未提交文件；不属于运行依赖，也不随主仓库分发。
 
 旧子模块 Git 对象保留于本地 `.git/modules`。恢复时应结合主仓库历史中的子模块提交与快照；快照里的 `.git` 可能是本地元数据指针，不保证可独立克隆。
+
+## 2021 限定范围与全库引用审查（2026-10-26）
+
+- 新增 9 页，截至 Qt 串口；更新 MQTT/TCP；Qt SQL 并入 SQLite。未编写可视化、报表或 HL7 页面。
+- 当前可用 examples 已检查：复用本手册独立编写的 TCP/SDK 契约；新写 Protobuf、SQLite、Qt JSON/UDP/线程/SQL/串口、TinyXML、libmosquitto、Paho Java 示例。没有复制历史工程或备份源码。
+- 按用户新要求清理原有正文：Opus、VAD、HTTP、cJSON 移除历史项目说明；SkEgn 改为本地契约并删除历史 C 接口引用；pthread 改为新写独立计数器，移除旧复用组件及其头文件。
+- 2016/2019 记录保留，2016 恢复原有 31 项计数；2019 的新增 SkEgn 独立归档。历史路径只允许出现在扫描/来源审计记录，正式页不得拿它们当源码参考。
+- 手册所有教学代码链接应解析到 DevelopingManual 内的 examples；官方 API/标准文档可以外链，第三方开发库可作为安装依赖。检查脚本拒绝正式页中的历史源码路径与越界本地链接。
+- 实际验证以 examples/README.md 为准；未安装的开发库、JDK 与厂商 SDK 不伪报通过。旧备份不恢复，也不作为构建依赖。

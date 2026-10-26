@@ -4,7 +4,7 @@
 - 适用版本与平台：见使用步骤和示例依赖；不继承历史工程版本
 - 标签：audio
 - 示例状态：libopus C 示例未编译；FFmpeg 编解码/容器示例已运行验证
-- 代码来源：为本手册新写；不引用 2016Codes 代码
+- 代码来源：为本手册独立新写；教学源码见本仓库 examples/
 
 ## 是什么
 
@@ -42,6 +42,7 @@ python3 examples/media/codec_demo.py opus --output /tmp/opus-media
 ## 常见问题
 
 frame_size 按每声道计数，不是字节或所有声道样本总数。有损编解码不能做 PCM 逐字节一致性断言。不要用 Ogg 文件头直接调用 opus_decode。
+
 
 ## 参考资料
 

@@ -1,0 +1,7 @@
+syntax = "proto3";
+package handbook;
+message Sample {
+  uint32 channel = 1;
+  double value = 2;
+  string unit = 3;
+}

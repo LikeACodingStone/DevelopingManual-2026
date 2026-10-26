@@ -12,7 +12,7 @@
 | python/encoding.py | Base64、HMAC 标准向量 | `python3 examples/python/encoding.py` |
 | python/vad.py | 新能量门控状态机，不是真正语音分类 | `python3 examples/python/vad.py` |
 | python/bacnet_whois.py | 默认仅构造发现报文 | `python3 examples/python/bacnet_whois.py` |
-| native/core_thread_example.c + threads.c | 复用互斥计数器、新并发驱动 | `make test` 自动编译运行 |
+| native/threads.c | 独立新写互斥计数器与双线程验证 | `make test` 自动编译运行 |
 | native/semaphore.c、varargs.c | 信号量、可变参数 | `make test` 自动编译运行 |
 | native/embed_python.c | 嵌入 Python 3.12 | 本机开发包存在，编译运行通过 |
 | native/tls.c | OpenSSL TLS 身份验证配置 | 本机编译通过，未访问外网 |
@@ -44,3 +44,21 @@ FFmpeg 验证不能代替 libopus、libmad、FAAD2 C 接口示例的构建验证
 ## 接入契约，不是厂商实现
 
 [integrations/sdk_session.py](integrations/sdk_session.py)用于说明专有 SDK 的资源生命周期；不调用云知声、Voice 或唤醒 SDK，不生成模拟识别结果。故障注入测试只验证失败路径释放，不代表 SDK 集成成功。
+
+## 2021 技术条目新增示例
+
+所有教学源文件均为本手册独立新写。没有从历史工程或备份复制实现；构建产物可写入临时目录，外部开发库属于安装依赖，不是手册源码引用。
+
+| 文件 | 验证范围 |
+| --- | --- |
+| python/sqlite_demo.py | Python 标准库，内存事务与约束失败回滚，已运行 |
+| protobuf/sample.proto、roundtrip.py | 新 schema 与坏输入检查；缺 protoc/Python protobuf，未运行 |
+| qt/json_demo.cpp、udp_demo.cpp、threads_demo.cpp、sqlite_demo.cpp | Qt 5/6 Core/Network/Sql；缺开发包，未编译；UDP 仅回环 |
+| qt/serial/serial_demo.cpp、serial.pro | QextSerialPort 1.2/Qt 5；未编译，未打开设备，默认只打印说明 |
+| native/tinyxml_demo.cpp | TinyXML 2.6 API；缺开发包，未编译 |
+| native/mosquitto_demo.c | libmosquitto；缺开发包，未编译，未连接 Broker |
+| java/PahoLocal.java | Java SE/Paho 1.2.x；缺 JDK/JAR，未编译；不是 Android APK |
+
+构建和运行命令见对应技术页。Android Service 仍为生命周期接入说明，没有伪造可运行 Android 工程。可选依赖缺失时检查脚本明确报告 SKIP，不当作测试通过。
+
+本轮实际检查环境：Linux x86_64，Python 3.12.3。`make test` 通过文档链接/结构检查、Python 语法与 9 项单元测试、本地 TCP/HTTP、SQLite 回滚和基础 C 示例；Qt、TinyXML、libmosquitto、Protobuf、Java 缺依赖明确跳过。`git diff --check` 通过；没有执行媒体重新编码、Broker、设备或云端联调。

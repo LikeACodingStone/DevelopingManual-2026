@@ -3,8 +3,8 @@
 - 别名与生态：pthread 线程与互斥锁
 - 适用版本与平台：见使用步骤和示例依赖；不继承历史工程版本
 - 标签：programming
-- 示例状态：复用组件 + 新并发驱动，已编译运行验证
-- 代码来源：summary_components 线程组件复用，驱动新写
+- 示例状态：独立新写双线程计数器，已编译运行验证
+- 代码来源：本手册独立新写，源码仅位于 examples/native/threads.c
 
 ## 是什么
 
@@ -26,10 +26,10 @@ POSIX 线程共享进程地址空间。互斥锁让同一临界区不会被多�
 
 以下命令均从仓库根目录运行。
 
-[计数器实现](../../examples/native/core_thread_example.c)直接复用原 summary_components 已迁移的线程组件；[新驱动](../../examples/native/threads.c)用两个线程验证。
+[独立计数器示例](../../examples/native/threads.c)用两个线程递增共享计数器，并检查 pthread 返回码。
 
 ```sh
-cc -std=c11 -Wall -Wextra -pthread examples/native/core_thread_example.c examples/native/threads.c -o /tmp/threads-demo
+cc -std=c11 -Wall -Wextra -pthread examples/native/threads.c -o /tmp/threads-demo
 /tmp/threads-demo
 ```
 
@@ -37,7 +37,7 @@ cc -std=c11 -Wall -Wextra -pthread examples/native/core_thread_example.c example
 
 ## 常见问题
 
-复用实现假定 mutex 初始化成功且生命周期正确，不处理误用导致的 lock/unlock 错误。int 计数器还应避免溢出。不能销毁正在使用的锁，不能用 volatile 替代同步。
+示例限制递增次数以避免计数溢出；创建第二个线程失败时会回收已经创建的线程。同步原语失败时示例立即结束进程，不演示复杂恢复。不能销毁正在使用的锁，不能用 volatile 替代同步。
 
 ## 参考资料
 

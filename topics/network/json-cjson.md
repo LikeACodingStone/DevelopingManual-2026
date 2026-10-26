@@ -4,7 +4,7 @@
 - 适用版本与平台：见使用步骤和示例依赖；不继承历史工程版本
 - 标签：network
 - 示例状态：新示例；需要外部开发库/环境，未编译或联调
-- 代码来源：为本手册新写；不引用 2016Codes 代码
+- 代码来源：为本手册独立新写；教学源码见本仓库 examples/
 
 ## 是什么
 
@@ -33,11 +33,12 @@ cc -std=c11 examples/native/cjson.c -lcjson -o /tmp/cjson-demo
 /tmp/cjson-demo
 ```
 
-依赖 cJSON 1.7 系列常见发行版头文件路径；不复用 summary_components 的字符串搜索解析器。
+依赖 cJSON 1.7 系列常见发行版头文件路径；另见使用不同 API 的 [Qt JSON](qt-json.md)。
 
 ## 常见问题
 
 字段缺失与 JSON null 不同。浮点数不能无损表达所有 64 位整数。不能在 Delete 后继续使用 valuestring；为不可信输入设置大小与嵌套限制。
+
 
 ## 参考资料
 

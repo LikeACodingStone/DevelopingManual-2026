@@ -4,7 +4,7 @@
 - 适用版本与平台：见使用步骤和示例依赖；不继承历史工程版本
 - 标签：iot
 - 示例状态：需要本地 Broker/Paho，未联调
-- 代码来源：为本手册新写；不引用 2016Codes 代码
+- 代码来源：为本手册独立新写；教学源码见本仓库 examples/
 
 ## 是什么
 
@@ -39,6 +39,8 @@ mosquitto_sub -h 127.0.0.1 -t handbook/demo -q 1
 ## 常见问题
 
 QoS 1 可能重复交付；retained message 是每主题保留的最新值，不是历史队列。通配符用于订阅，不用于普通发布主题。公网应配置身份认证与 TLS。
+
+客户端实现可选 [libmosquitto](libmosquitto.md)、[Paho Java/Android](paho-java.md) 或 [Paho C](paho-c.md)。仪器命令与状态应使用清晰的主题、请求 ID 和业务去重；Broker 的确认不是设备动作完成确认。
 
 ## 参考资料
 
