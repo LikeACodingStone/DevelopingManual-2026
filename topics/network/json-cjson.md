@@ -43,4 +43,4 @@ cc -std=c11 examples/native/cjson.c -lcjson -o /tmp/cjson-demo
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://github.com/DaveGamble/cJSON)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

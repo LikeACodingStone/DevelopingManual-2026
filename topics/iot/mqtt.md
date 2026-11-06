@@ -45,4 +45,4 @@ QoS 1 可能重复交付；retained message 是每主题保留的最新值，不
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

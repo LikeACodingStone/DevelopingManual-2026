@@ -35,7 +35,7 @@
 
 按以下顺序判断，记录实际采用的方案：
 
-1. 检查本手册已有独立教学示例，先查[来源说明](sources.md)核实来源；旧组件仅用于历史审计，不恢复旧仓库结构或复制其实现。
+1. 检查本手册已有独立教学示例，先查[来源说明](catalog/Chinese/sources.md)核实来源；旧组件仅用于历史审计，不恢复旧仓库结构或复制其实现。
 2. 复用本手册示例前核对其独立来源、实际功能、接口与依赖、输入边界、资源释放和许可。文件名相似不构成复用依据。
 3. 适用则复用，必要时修正并说明改动；不适用或无法取得则新写独立、最小、可运行的教学示例。
 4. **不得从被扫描的旧项目复制、改名搬运或引用代码作为手册示例。**扫描证据与教学代码分开：正文使用官方资料和本手册示例，历史项目只用于识别技术。
@@ -66,7 +66,7 @@
 - FFmpeg 验证不能代替特定 C 库示例的编译；离线测试不能证明真实设备、云服务、Broker 或专有 SDK 已联调成功。
 - 不自动发送云请求、发布 MQTT 消息、写入硬件或执行其他有外部影响的演示；需要联调时遵循用户已授权的范围。
 - 检查页面结构、本地链接、Python 语法以及 `git diff --check`。缺少依赖就明确说明，不伪造通过记录。
-- 更新 `README.md` 导航、项目扫描清单、`examples/README.md` 验证范围和 `sources.md` 复用判断。保留其他项目的记录，不覆盖成仅描述本轮任务的文档。
+- 更新 `README.md` 导航、项目扫描清单、`examples/README.md` 验证范围和 `catalog/Chinese/sources.md` 复用判断。保留其他项目的记录，不覆盖成仅描述本轮任务的文档。
 - 最后用中文简要说明新增/更新条目、复用与新写情况、实际检查结果、仍待联调项。未要求时不自动提交、推送或发布。
 
 ## 仓库管理
@@ -96,3 +96,14 @@
 ```
 
 如已确认范围，可将“先扫描……等我确认”替换为“以下清单已确认，请直接完成编写和验证：<清单>”，无需再次确认同一范围。
+
+## 双语版本约定（2026-11-06 新增）
+
+用户要求：流程产生的 Markdown 文件各做中文和英文两个版本，内容相同、语言不同，分别放在 English 与 Chinese 目录。
+
+- 扫描记录：`catalog/Chinese/<项目短名>-scope.md` 与 `catalog/English/<项目短名>-scope.md`，互相链接，数字与证据必须一致。2025Codes 之前的记录仍在 `catalog/` 根目录，只有中文，不迁移。
+- 新技术页：`topics/Chinese/<分类>/<名称>.md` 与 `topics/English/<分类>/<名称>.md`。中文使用[模板](topics/TEMPLATE.md)的六节标题，英文使用[英文模板](topics/TEMPLATE_EN.md)的 What it is / When to use / How to use / Minimal example / FAQ / References。
+- 更新 2025Codes 之前的旧页：中文页原地修改；英文版是整页翻译，放在 `topics/English/<分类>/` 同名文件。其余未更新的旧页暂无英文版。
+- 索引：`README.md` 是主 README（中文），`README_CH.md` 与它正文相同，`README_EN.md` 是英文版；上文所说的“更新 README.md 导航”现在指同时更新这三个文件，检查脚本会比对 `README.md` 与 `README_CH.md`。`examples/README.md` 的英文版是 `examples/README_EN.md`。来源说明放在 `catalog/Chinese/sources.md`，英文版 `catalog/English/sources.md`；根目录不放 sources 文件。
+- 教学代码只有一份，位于 `examples/`，不分语言。
+- `tools/check_handbook.py` 检查英文页标题、中英文页面一一对应以及 `catalog/` 两个语言目录互相对应。交付前两种语言都要通过它。

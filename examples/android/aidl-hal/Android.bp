@@ -1,0 +1,31 @@
+// Sketch of an AOSP build file. NOT built here (needs an AOSP source tree).
+aidl_interface {
+    name: "hardware.handbook.echo",
+    vendor_available: true,
+    srcs: ["hardware/handbook/echo/*.aidl"],
+    stability: "vintf",
+    backend: {
+        ndk: {
+            enabled: true,
+        },
+    },
+    // After the first release, freeze the API and list it:
+    // versions: ["1"],
+}
+
+cc_binary {
+    name: "hardware.handbook.echo-service",
+    relative_install_path: "hw",
+    init_rc: ["hardware.handbook.echo.rc"],
+    vintf_fragments: ["hardware.handbook.echo.xml"],
+    vendor: true,
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "liblog",
+        // Generated library name = <aidl_interface name>-V<version>-ndk. Older AOSP releases
+        // used the suffix -ndk_platform instead; follow the AIDL docs of your AOSP release.
+        "hardware.handbook.echo-V1-ndk",
+    ],
+    srcs: ["Service.cpp"],
+}

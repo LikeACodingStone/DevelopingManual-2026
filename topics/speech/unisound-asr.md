@@ -37,4 +37,4 @@ ASR 把音频转换为文本。云知声 SDK 属于具体厂商产品，鉴权�
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://www.unisound.com/)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

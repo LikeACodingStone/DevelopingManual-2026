@@ -42,4 +42,4 @@ NULL 常表示异常，不应继续调用。borrowed reference 与 new reference
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://docs.python.org/3/extending/embedding.html)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

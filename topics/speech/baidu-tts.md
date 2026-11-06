@@ -41,4 +41,4 @@ URL 编码不是 Base64；避免业务层和 HTTP 层重复编码。服务端错
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://ai.baidu.com/ai-doc/SPEECH)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

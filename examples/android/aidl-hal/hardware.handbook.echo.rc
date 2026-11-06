@@ -1,0 +1,5 @@
+service vendor.handbook.echo /vendor/bin/hw/hardware.handbook.echo-service
+    interface aidl hardware.handbook.echo.IEcho/default
+    class hal
+    user system
+    group system

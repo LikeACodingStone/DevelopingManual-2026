@@ -1,0 +1,10 @@
+// proto2 schema for the C++ round-trip example. Synthetic fields only.
+// proto2 and proto3 differ in field presence, required fields and default values.
+syntax = "proto2";
+package handbook.v2;
+
+message Reading {
+  required uint32 sensor_id = 1;           // must be present when the message is serialized/parsed
+  optional double value = 2 [default = -1.0]; // has_value() tells "absent" from "set to the default"
+  optional string unit = 3;
+}

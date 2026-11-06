@@ -42,4 +42,4 @@ cc -std=c11 examples/native/mixer.c -lasound -o /tmp/mixer-demo
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://www.alsa-project.org/alsa-doc/alsa-lib/group___simple_mixer.html)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

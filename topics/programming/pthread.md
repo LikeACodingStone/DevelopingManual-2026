@@ -42,4 +42,4 @@ cc -std=c11 -Wall -Wextra -pthread examples/native/threads.c -o /tmp/threads-dem
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/pthread.h.html)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

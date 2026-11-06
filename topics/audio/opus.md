@@ -47,4 +47,4 @@ frame_size 按每声道计数，不是字节或所有声道样本总数。有损
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://opus-codec.org/docs/)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

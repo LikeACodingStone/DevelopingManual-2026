@@ -40,4 +40,4 @@ python3 examples/python/encoding.py
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://www.rfc-editor.org/rfc/rfc4648.html)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

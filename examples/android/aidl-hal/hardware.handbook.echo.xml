@@ -1,0 +1,7 @@
+<manifest version="1.0" type="device">
+    <hal format="aidl">
+        <name>hardware.handbook.echo</name>
+        <version>1</version>
+        <fqname>IEcho/default</fqname>
+    </hal>
+</manifest>

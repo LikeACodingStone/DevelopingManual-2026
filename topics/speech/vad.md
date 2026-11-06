@@ -41,4 +41,4 @@ python3 examples/python/vad.py
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://github.com/wiseman/py-webrtcvad)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

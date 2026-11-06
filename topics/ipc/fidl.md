@@ -44,14 +44,33 @@ closed protocol Echo {
 ```fidl
 package handbook
 
+import handbook.Types.* from "Types.fidl"
+
+<**
+  @description : 回显服务。文档注释使用 <** ... **>。
+**>
 interface Echo {
     version { major 1 minor 0 }
+
+    attribute UInt32 callCount readonly
+
     method echo {
         in { String text }
         out { String reply }
     }
+
+    broadcast echoed {
+        out { String text }
+    }
 }
 ```
+
+几个常见元素：
+
+- `package` 和 `import ... from "文件"`：把类型拆到别的 `.fidl` 文件里引用。
+- `version { major minor }`：接口版本。约定上主版本变化表示不兼容，次版本变化应保持兼容；Franca 本身不检查兼容性。
+- `method`（请求/响应）、`broadcast`（服务端向订阅者推送事件）、`attribute`（可读写的状态，可标 `readonly`）。
+- `<** ... **>`：文档注释，生成器可以把它带进生成代码。
 
 使用步骤：
 
@@ -61,11 +80,15 @@ interface Echo {
 4. 实现服务端并注册服务，客户端创建代理后调用。
 5. 配置 D-Bus 或 SOME/IP 等运行环境，验证发现和请求响应。
 
+生成器不一定是 CommonAPI。也有工程用自研生成器读取 `.fidl`，再生成自己的适配代码（可能对接 D-Bus、JSON 消息或 JNI 等）。此时部署信息、运行库和传输方式都由该生成器规定，不能套用 CommonAPI 的文档。
+
 ## 常见问题
 
 - 先问清楚生态，再查 FIDL 用法。
 - 生成器、运行库和绑定版本必须兼容。
 - 接口变更需考虑双方兼容性；能重新生成代码不代表旧客户端仍兼容。
+- 两种 FIDL 都不是 Android 的 [AIDL](../Chinese/programming/android-aidl.md) 或 Protobuf：语法、工具链和传输各不相同。
+- 先弄清楚工程用的是 CommonAPI 还是自研生成器，再去找对应的部署文件和运行库说明。
 - 上述片段只展示接口形状，不是已验证的完整工程。
 
 ## 参考资料

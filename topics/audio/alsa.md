@@ -42,4 +42,4 @@ EPIPE 常表示欠载/溢出，可用 snd_pcm_recover；重复失败应退出，
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://www.alsa-project.org/alsa-doc/alsa-lib/pcm.html)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

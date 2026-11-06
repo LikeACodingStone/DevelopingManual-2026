@@ -43,4 +43,4 @@ samples 包含所有声道的样本总数，不能直接当作每声道帧数。
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://github.com/knik0/faad2)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

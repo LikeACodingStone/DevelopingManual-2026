@@ -42,4 +42,4 @@ cc -std=c11 examples/native/paho.c -lpaho-mqtt3c -o /tmp/paho-demo
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://eclipse-paho.github.io/paho.mqtt.c/MQTTClient/html/)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

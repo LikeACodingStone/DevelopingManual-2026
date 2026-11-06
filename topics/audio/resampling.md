@@ -42,4 +42,4 @@ cc -std=c11 examples/native/resample.c -lspeexdsp -o /tmp/resample-demo
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://www.speex.org/docs/manual/speex-manual/node7.html)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

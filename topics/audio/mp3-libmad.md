@@ -43,4 +43,4 @@ cc -std=c11 examples/native/mad.c -lmad -o /tmp/mad-demo
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://www.underbit.com/products/mad/)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

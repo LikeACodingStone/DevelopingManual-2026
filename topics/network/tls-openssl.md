@@ -42,4 +42,4 @@ OpenSSL >=1.1.1。编译已通过；未访问公网验证握手。
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://docs.openssl.org/3.0/man7/ossl-guide-tls-client-block/)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

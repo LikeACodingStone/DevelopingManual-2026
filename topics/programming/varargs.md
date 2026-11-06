@@ -42,4 +42,4 @@ cc -std=c11 -Wall -Wextra -Wformat=2 examples/native/varargs.c -o /tmp/varargs-d
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://en.cppreference.com/w/c/variadic)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

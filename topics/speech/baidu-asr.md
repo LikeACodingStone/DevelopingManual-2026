@@ -41,4 +41,4 @@ WAV 文件头不能作为裸 PCM 输入。示例只检查长度和对齐，不�
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://ai.baidu.com/ai-doc/SPEECH)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

@@ -41,4 +41,4 @@ pcm_write 的长度是字节；新版帧接口 pcm_writei 使用帧。不要把 
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://github.com/tinyalsa/tinyalsa)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)

@@ -62,3 +62,29 @@ FFmpeg 验证不能代替 libopus、libmad、FAAD2 C 接口示例的构建验证
 构建和运行命令见对应技术页。Android Service 仍为生命周期接入说明，没有伪造可运行 Android 工程。可选依赖缺失时检查脚本明确报告 SKIP，不当作测试通过。
 
 本轮实际检查环境：Linux x86_64，Python 3.12.3。`make test` 通过文档链接/结构检查、Python 语法与 9 项单元测试、本地 TCP/HTTP、SQLite 回滚和基础 C 示例；Qt、TinyXML、libmosquitto、Protobuf、Java 缺依赖明确跳过。`git diff --check` 通过；没有执行媒体重新编码、Broker、设备或云端联调。
+
+## 2025 技术条目新增示例
+
+所有教学源文件均为本手册独立新写，没有复制历史工程源码。运行方式见对应技术页；`make test` 自动运行表中标“已运行”的项目。
+
+| 文件 | 验证范围 |
+| --- | --- |
+| python/websocket_minimal.py | 标准库；回环握手、帧、掩码、分片、ping/pong、关闭；已运行 |
+| python/unix_socket.py | 标准库；AF_UNIX 回环，含遗留文件、权限、对端 uid；已运行 |
+| python/zlib_demo.py、native/zlib_demo.c | zlib 三种封装、损坏/截断/超限输入；Python 与 C 均已运行 |
+| native/termios_pty.c | 伪终端上的 termios 配置与读超时；已运行，不打开真实串口 |
+| python/test_ipc_examples.py | 上述 Python 示例的 RFC 向量与拒绝路径测试，23 项 |
+
+| 文件 | 依赖 | 范围 |
+| --- | --- | --- |
+| native/jsoncpp_demo.cpp | jsoncpp 开发包 | 严格解析与类型检查；未编译 |
+| native/lua_embed.c | Lua 5.4 开发包 | 注册 C 函数、保护调用、栈平衡；未编译 |
+| native/sqlite_c_readonly.c | sqlite3 开发包 | 只读连接与失败路径；未编译 |
+| protobuf/legacy_v2.proto、cpp_roundtrip.cpp | protoc、libprotobuf | proto2 必填字段与存在性；未编译 |
+| java/jni/ | JDK、`jni.h` | 字符串、数组、异常、句柄；未编译 |
+| android/aidl-service/ | Android SDK | Java AIDL 服务与客户端；结构示意，未构建 |
+| android/aidl-hal/ | AOSP 源码树 | 稳定 AIDL HAL；结构示意，未构建 |
+
+检查脚本对上表中可以自动构建的项目（jsoncpp、Lua、SQLite C、Protobuf C++、JNI）在依赖存在时编译运行，缺失时明确打印 SKIP；这些依赖安装后的行为本轮没有被实际检验。Android 两个目录没有对应的 Android 工程或设备，没有伪造构建结果。
+
+本轮（2025）实际检查环境：Linux x86_64，Python 3.12.3，gcc 13.3。`make test` 通过：文档链接/结构检查 82 个文件、Python 单元测试 32 项（pcm 3 项 + 示例 29 项，其中本轮新增 23 项）、本地 TCP/HTTP、新增的 WebSocket / Unix 套接字 / zlib（Python 与 C）/ termios 伪终端示例，以及原有的基础 C 示例。jsoncpp、Lua、SQLite C、Protobuf、Protobuf C++、JNI、Android、Qt、TinyXML、libmosquitto、Paho Java 因缺少依赖明确跳过。没有执行 Android 构建、真实串口、浏览器 WebSocket 或其他设备/云端联调。

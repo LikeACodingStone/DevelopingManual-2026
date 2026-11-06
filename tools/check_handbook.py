@@ -18,11 +18,11 @@ def run(args, **kwargs):
 
 def check_docs():
     failures = []
-    docs = [*ROOT.glob('*.md'), *ROOT.glob('topics/**/*.md'), *ROOT.glob('catalog/*.md'), *ROOT.glob('examples/**/*.md')]
+    docs = [*ROOT.glob('*.md'), *ROOT.glob('topics/**/*.md'), *ROOT.glob('catalog/*.md'), *ROOT.glob('catalog/*/*.md'), *ROOT.glob('examples/**/*.md')]
     for doc in docs:
         content = doc.read_text()
         is_topic = ROOT / 'topics' in doc.parents
-        if is_topic and re.search(r'Coding_0001_HistoryTree|20(?:16|19|21)Codes|src/egn/|misc/demos/|summary_components', content):
+        if is_topic and re.search(r'Coding_0001_HistoryTree|20(?:16|19|21|23|25)Codes|src/egn/|misc/demos/|summary_components', content):
             failures.append(f'{doc}: historical source reference in a technical page')
         for target in re.findall(r'\]\(([^)]+)\)', content):
             if '://' in target or target.startswith('#'):
@@ -35,13 +35,39 @@ def check_docs():
             if not destination.exists():
                 failures.append(f'{doc.relative_to(ROOT)}: missing {target}')
         if doc.parent != ROOT / 'topics' and ROOT / 'topics' in doc.parents:
-            for heading in ['是什么', '何时使用', '如何使用', '最小示例', '常见问题', '参考资料']:
+            english = ROOT / 'topics' / 'English' in doc.parents
+            headings = (['What it is', 'When to use', 'How to use', 'Minimal example', 'FAQ', 'References'] if english
+                        else ['是什么', '何时使用', '如何使用', '最小示例', '常见问题', '参考资料'])
+            for heading in headings:
                 # Existing PCM and FIDL pages have their own already-established layouts.
                 if doc.name not in ('pcm.md', 'fidl.md') and f'## {heading}' not in content:
                     failures.append(f'{doc}: missing heading {heading}')
+    failures += check_language_pairs()
+    main_readme = (ROOT / 'README.md').read_text().split('\n')[3:]
+    if main_readme != (ROOT / 'README_CH.md').read_text().split('\n')[3:]:
+        failures.append('README.md body differs from README_CH.md; keep them identical below the header line')
     if failures:
         raise RuntimeError('\n'.join(failures))
     print(f'Document links/structure OK: {len(docs)} files')
+
+
+def check_language_pairs():
+    """Every topics/English page needs a Chinese page with the same name and category, and the
+    other way round for topics/Chinese; catalog/English and catalog/Chinese must mirror each other."""
+    failures = []
+    topics = ROOT / 'topics'
+    for page in (topics / 'English').glob('**/*.md'):
+        relative = page.relative_to(topics / 'English')
+        if not ((topics / 'Chinese' / relative).exists() or (topics / relative).exists()):
+            failures.append(f'{page.relative_to(ROOT)}: no Chinese counterpart')
+    for page in (topics / 'Chinese').glob('**/*.md'):
+        if not (topics / 'English' / page.relative_to(topics / 'Chinese')).exists():
+            failures.append(f'{page.relative_to(ROOT)}: no English counterpart')
+    for side, other in (('English', 'Chinese'), ('Chinese', 'English')):
+        for page in (ROOT / 'catalog' / side).glob('*.md'):
+            if not (ROOT / 'catalog' / other / page.name).exists():
+                failures.append(f'{page.relative_to(ROOT)}: missing in catalog/{other}')
+    return failures
 
 
 def native_checks(tmp):
@@ -53,10 +79,20 @@ def native_checks(tmp):
         ('semaphore', ['semaphore.c'], ['-pthread'], 'value=42'),
         ('varargs', ['varargs.c'], [], 'name=PCM count=2 ratio=0.5'),
     ]
+    if Path('/dev/ptmx').exists():
+        cases.append(('termios_pty', ['termios_pty.c'], [], 'termios pty loopback OK'))
+    else:
+        print('SKIP termios_pty.c: /dev/ptmx is not available')
+    if subprocess.run(['pkg-config', '--exists', 'zlib']).returncode == 0:
+        cases.append(('zlib_demo', ['zlib_demo.c'], ['-lz'], 'zlib C round trip OK'))
+    else:
+        print('SKIP zlib_demo.c: missing zlib development package')
     for name, sources, flags, expected in cases:
         out = tmp / name
-        run([cc, '-std=c11', '-Wall', '-Wextra', '-Werror', *flags,
-             *[ROOT / 'examples/native' / s for s in sources], '-o', out])
+        compile_flags = [f for f in flags if not f.startswith('-l')]
+        link_flags = [f for f in flags if f.startswith('-l')]
+        run([cc, '-std=c11', '-Wall', '-Wextra', '-Werror', *compile_flags,
+             *[ROOT / 'examples/native' / s for s in sources], *link_flags, '-o', out])
         result = subprocess.run([out], check=True, capture_output=True, text=True, timeout=10)
         if expected not in result.stdout:
             raise RuntimeError(f'{name}: unexpected output {result.stdout}')
@@ -86,6 +122,9 @@ def new_example_checks(tmp):
     for pkg, source, compiler in [
         ('tinyxml', 'tinyxml_demo.cpp', 'c++'),
         ('libmosquitto', 'mosquitto_demo.c', 'cc'),
+        ('jsoncpp', 'jsoncpp_demo.cpp', 'c++'),
+        ('lua5.4', 'lua_embed.c', 'cc'),
+        ('sqlite3', 'sqlite_c_readonly.c', 'cc'),
     ]:
         probe = subprocess.run(['pkg-config', '--cflags', '--libs', pkg], capture_output=True, text=True)
         if probe.returncode or not shutil.which(compiler):
@@ -119,6 +158,30 @@ def new_example_checks(tmp):
         run([sys.executable, 'examples/protobuf/roundtrip.py'], env=env)
     else:
         print('SKIP Protobuf: missing protoc or Python protobuf')
+    pkg_protobuf = subprocess.run(['pkg-config', '--cflags', '--libs', 'protobuf'], capture_output=True, text=True)
+    if shutil.which('protoc') and shutil.which('c++') and pkg_protobuf.returncode == 0:
+        import shlex
+        generated = tmp / 'protobuf-cpp'
+        generated.mkdir()
+        run(['protoc', '-I', ROOT / 'examples/protobuf', f'--cpp_out={generated}', ROOT / 'examples/protobuf/legacy_v2.proto'])
+        run(['c++', '-std=c++17', '-Wall', '-Wextra', f'-I{generated}', ROOT / 'examples/protobuf/cpp_roundtrip.cpp',
+             generated / 'legacy_v2.pb.cc', *shlex.split(pkg_protobuf.stdout), '-o', tmp / 'proto-cpp'])
+        run([tmp / 'proto-cpp'])
+    else:
+        print('SKIP Protobuf C++: missing protoc, c++ or libprotobuf development package')
+    java_home = os.environ.get('JAVA_HOME')
+    if shutil.which('javac') and shutil.which('java') and shutil.which('cc') and java_home and (Path(java_home) / 'include/jni.h').is_file():
+        jni = tmp / 'jni'
+        (jni / 'include').mkdir(parents=True)
+        (jni / 'classes').mkdir()
+        run(['javac', '-h', jni / 'include', '-d', jni / 'classes', 'examples/java/jni/handbook/NativeDemo.java'])
+        run(['cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-fPIC', '-shared', f'-I{jni / "include"}',
+             f'-I{java_home}/include', f'-I{java_home}/include/linux', 'examples/java/jni/handbook_jni.c',
+             '-o', jni / 'libhandbook_jni.so'])
+        run(['java', f'-Djava.library.path={jni}', '-cp', jni / 'classes', 'handbook.NativeDemo'])
+    else:
+        print('SKIP JNI: missing JDK (javac/java) or JAVA_HOME with jni.h')
+    print('SKIP Android AIDL and AIDL HAL: sketches need the Android SDK / an AOSP source tree')
     jar = os.environ.get('PAHO_JAR')
     if shutil.which('javac') and shutil.which('java') and jar and Path(jar).is_file():
         classes = tmp / 'java'
@@ -136,7 +199,8 @@ def main():
     check_docs()
     run([sys.executable, '-m', 'unittest', 'discover', '-s', 'examples/pcm-read-write', '-p', 'test_*.py'])
     run([sys.executable, '-m', 'unittest', 'discover', '-s', 'examples/python', '-p', 'test_*.py'])
-    for name in ['framed_tcp.py', 'http_local.py', 'encoding.py', 'vad.py', 'bacnet_whois.py']:
+    for name in ['framed_tcp.py', 'http_local.py', 'encoding.py', 'vad.py', 'bacnet_whois.py',
+                 'unix_socket.py', 'zlib_demo.py', 'websocket_minimal.py']:
         run([sys.executable, ROOT / 'examples/python' / name])
     with tempfile.TemporaryDirectory(prefix='handbook-check-') as tmp:
         native_checks(Path(tmp))

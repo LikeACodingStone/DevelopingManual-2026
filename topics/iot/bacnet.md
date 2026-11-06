@@ -42,4 +42,4 @@ Who-Is 是发现请求，不是 ReadProperty；例子不实现 I-Am 解析或完
 ## 参考资料
 
 - [官方资料或明确标注的技术参考](https://bacnet.org/)
-- [代码来源与验证范围](../../sources.md)
+- [代码来源与验证范围](../../catalog/Chinese/sources.md)
