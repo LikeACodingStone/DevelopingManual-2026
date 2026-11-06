@@ -1,10 +1,12 @@
 # 给 Codex 的技术手册提取指令
 
-每次从其他项目提取技术时，先阅读本文、[维护约定](CONTRIBUTING.md)、[条目模板](topics/TEMPLATE.md)和[当前索引](README.md)，再执行任务。用户本次明确指定的范围和阶段优先于默认流程。
+[English](command_for_ai_EN.md) · 中文（本文件）
+
+每次从其他项目提取技术时，先阅读本文、[条目模板](topics/TEMPLATE.md)（[英文模板](topics/TEMPLATE_EN.md)）和当前索引（[中文](README_CH.md)、[英文](README_EN.md)），再执行任务。用户本次明确指定的范围和阶段优先于默认流程。
 
 ## 目标与筛选原则
 
-维护一份中文技术查询手册，让读者能快速找到“这是什么、何时用、怎么用、示例、常见问题”。项目只是发现技术的线索，不生成项目回顾、目录翻译或全部依赖清单。
+维护一份技术查询手册，主体为中文，2025Codes 起新增和更新的页面同时提供英文版（见文末“双语版本约定”），让读者能快速找到“这是什么、何时用、怎么用、示例、常见问题”。项目只是发现技术的线索，不生成项目回顾、目录翻译或全部依赖清单。
 
 - 优先提取可以独立查询的格式、协议、库、SDK、API、接口语言和具体编程机制，例如 PCM、FIDL、Opus、MQTT、线程同步。
 - Linux、C/C++ 等宽泛平台或语言不单独建页；有独立使用价值的具体机制可以记录。
@@ -27,7 +29,7 @@
 5. 分类只用于导航。其他领域的技术应提出合适的分类建议，不强行塞入现有类别；页面仍统一使用后述六节模板。
 6. 给出新增、更新、合并、暂缓的清单和准确数量。新项目默认先提交候选汇总，等待用户确认后再生成正式技术页与示例；用户已明确确认或授权直接生成时，继续执行，不重复请求确认。
 
-扫描阶段可在 `catalog/<项目短名>-scope.md` 保存候选记录。若用户要求“仅汇总、不写文件”，只在回复中展示结果，不创建文件。
+扫描阶段在 `catalog/Chinese/<项目短名>-scope.md` 与 `catalog/English/<项目短名>-scope.md` 保存候选记录（内容相同、语言不同）。若用户要求“仅汇总、不写文件”，只在回复中展示结果，不创建文件。
 
 ## 第二阶段：选择示例来源
 
@@ -66,7 +68,8 @@
 - FFmpeg 验证不能代替特定 C 库示例的编译；离线测试不能证明真实设备、云服务、Broker 或专有 SDK 已联调成功。
 - 不自动发送云请求、发布 MQTT 消息、写入硬件或执行其他有外部影响的演示；需要联调时遵循用户已授权的范围。
 - 检查页面结构、本地链接、Python 语法以及 `git diff --check`。缺少依赖就明确说明，不伪造通过记录。
-- 更新 `README.md` 导航、项目扫描清单、`examples/README.md` 验证范围和 `catalog/Chinese/sources.md` 复用判断。保留其他项目的记录，不覆盖成仅描述本轮任务的文档。
+- 更新 `README_CH.md` 与 `README_EN.md` 的导航、`examples/README.md` 验证范围和 `catalog/Chinese/sources.md` 复用判断。保留其他项目的记录，不覆盖成仅描述本轮任务的文档。
+- README 只做导航：把新页面按语言/框架加入对应的表，更新页面总数，并在开头的扫描清单里加一行指向扫描记录的链接。**不要在 README 里新增“XXXXCodes 扫描结果/汇总”之类的章节。**扫描结果、数量、已完成和待定状态只写在 `catalog/Chinese/` 与 `catalog/English/` 的扫描记录里；检查脚本会拒绝标题含 `XXXXCodes` 的 README 章节。
 - 最后用中文简要说明新增/更新条目、复用与新写情况、实际检查结果、仍待联调项。未要求时不自动提交、推送或发布。
 
 ## 仓库管理
@@ -99,11 +102,13 @@
 
 ## 双语版本约定（2026-11-06 新增）
 
-用户要求：流程产生的 Markdown 文件各做中文和英文两个版本，内容相同、语言不同，分别放在 English 与 Chinese 目录。
+用户要求：流程产生的 Markdown 文件各做中文和英文两个版本，内容相同、语言不同。
 
+- 本指令：`command_for_ai.md` 是中文版，`command_for_ai_EN.md` 是英文版，章节和规则一一对应；改一份必须同步改另一份。
+- 索引：`README_CH.md`（中文）与 `README_EN.md`（英文），结构相同；规则见上文第四阶段，README 里不放扫描结果章节。`examples/README.md` 的英文版是 `examples/README_EN.md`。
 - 扫描记录：`catalog/Chinese/<项目短名>-scope.md` 与 `catalog/English/<项目短名>-scope.md`，互相链接，数字与证据必须一致。2025Codes 之前的记录仍在 `catalog/` 根目录，只有中文，不迁移。
+- 来源说明：`catalog/Chinese/sources.md` 与 `catalog/English/sources.md`；根目录不放 sources 文件。
 - 新技术页：`topics/Chinese/<分类>/<名称>.md` 与 `topics/English/<分类>/<名称>.md`。中文使用[模板](topics/TEMPLATE.md)的六节标题，英文使用[英文模板](topics/TEMPLATE_EN.md)的 What it is / When to use / How to use / Minimal example / FAQ / References。
 - 更新 2025Codes 之前的旧页：中文页原地修改；英文版是整页翻译，放在 `topics/English/<分类>/` 同名文件。其余未更新的旧页暂无英文版。
-- 索引：`README.md` 是主 README（中文），`README_CH.md` 与它正文相同，`README_EN.md` 是英文版；上文所说的“更新 README.md 导航”现在指同时更新这三个文件，检查脚本会比对 `README.md` 与 `README_CH.md`。`examples/README.md` 的英文版是 `examples/README_EN.md`。来源说明放在 `catalog/Chinese/sources.md`，英文版 `catalog/English/sources.md`；根目录不放 sources 文件。
 - 教学代码只有一份，位于 `examples/`，不分语言。
-- `tools/check_handbook.py` 检查英文页标题、中英文页面一一对应以及 `catalog/` 两个语言目录互相对应。交付前两种语言都要通过它。
+- `tools/check_handbook.py` 检查英文页标题、中英文页面一一对应、`catalog/` 两个语言目录互相对应、两份 README 结构一致、两份本指令结构一致。交付前两种语言都要通过它。

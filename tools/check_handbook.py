@@ -43,12 +43,41 @@ def check_docs():
                 if doc.name not in ('pcm.md', 'fidl.md') and f'## {heading}' not in content:
                     failures.append(f'{doc}: missing heading {heading}')
     failures += check_language_pairs()
-    main_readme = (ROOT / 'README.md').read_text().split('\n')[3:]
-    if main_readme != (ROOT / 'README_CH.md').read_text().split('\n')[3:]:
-        failures.append('README.md body differs from README_CH.md; keep them identical below the header line')
+    failures += check_bilingual_root_files()
     if failures:
         raise RuntimeError('\n'.join(failures))
     print(f'Document links/structure OK: {len(docs)} files')
+
+
+def check_bilingual_root_files():
+    """README_CH/README_EN and command_for_ai/command_for_ai_EN must have the same structure.
+    A README is navigation only: no section whose heading names a scanned project (e.g. '2025Codes ...')."""
+    failures = []
+
+    def shape(path):
+        text = path.read_text()
+        return {
+            'headings': len(re.findall(r'^#{2,3} ', text, re.M)),
+            'code blocks': len(re.findall(r'^```', text, re.M)) // 2,
+            'list items': len(re.findall(r'^\s*(?:- |\d+\. )', text, re.M)),
+            'table rows': len(re.findall(r'^\| (?!---)', text, re.M)),
+        }
+
+    for first, second in (('README_CH.md', 'README_EN.md'), ('command_for_ai.md', 'command_for_ai_EN.md')):
+        for name in (first, second):
+            if not (ROOT / name).exists():
+                failures.append(f'{name}: missing')
+        if all((ROOT / n).exists() for n in (first, second)):
+            a, b = shape(ROOT / first), shape(ROOT / second)
+            for key in a:
+                if a[key] != b[key]:
+                    failures.append(f'{first} vs {second}: {key} differ ({a[key]} vs {b[key]})')
+    for name in ('README_CH.md', 'README_EN.md'):
+        if (ROOT / name).exists():
+            for line in (ROOT / name).read_text().splitlines():
+                if line.startswith('#') and re.search(r'(?:\d{4}|XXXX)Codes', line):
+                    failures.append(f'{name}: scan-result section in a README is not allowed: {line}')
+    return failures
 
 
 def check_language_pairs():
