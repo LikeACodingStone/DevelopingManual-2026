@@ -4,6 +4,8 @@
 
 查询具体技术是什么、何时使用、如何使用，以及示例与常见问题。技术分类仅用于导航，不按分类创建子仓库。
 
+> `Projects/` 目录已加密。解密与更新方法见 [README_ENCRYPTION_CH.md](README_ENCRYPTION_CH.md)。
+
 [2016 确认清单](catalog/2016-scope.md)包含 31 个正式条目；[2019 清单](catalog/2019Codes-scope.md)记录 SkEgn；[2021 清单](catalog/2021Codes-scope.md)新增 9 个条目并更新 MQTT/TCP。另有 FIDL 页面，2025 轮次之前共 42 个页面，加上 2025 轮次后共 51 个。[2023 清单](catalog/2023Codes-scope.md)仍是待确认候选，尚无正式页。[2025 清单](catalog/Chinese/2025Codes-scope.md)新增 9 个条目并更新 SQLite、Protobuf、FIDL。以下按手册示例使用的主要语言或框架导航；跨语言主题可能出现在多个表中。所有教学代码位于本仓库 `examples/`。
 
 ## 语言版本与目录

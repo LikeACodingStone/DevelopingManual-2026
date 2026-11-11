@@ -4,6 +4,8 @@ English (this file) · [中文](README_CH.md)
 
 Look up what a specific technology is, when to use it, how to use it, plus examples and common problems. Technology categories are for navigation only; no sub-repository is created per category.
 
+> The `Projects/` folder is encrypted. How to decrypt and update it: [README_ENCRYPTION_EN.md](README_ENCRYPTION_EN.md).
+
 The [2016 confirmed list](catalog/2016-scope.md) (zh) has 31 formal entries; the [2019 list](catalog/2019Codes-scope.md) (zh) records SkEgn; the [2021 list](catalog/2021Codes-scope.md) (zh) adds 9 entries and updates MQTT/TCP. There is also a FIDL page, for 42 pages before the 2025 round and 51 after it. The [2023 list](catalog/2023Codes-scope.md) (zh) is still a set of candidates awaiting confirmation and has no formal pages yet. The [2025 list](catalog/English/2025Codes-scope.md) adds 9 entries and updates SQLite, Protobuf and FIDL. The tables below are organized by the main language or framework of the handbook's examples; cross-language topics can appear in several tables. All teaching code is in this repository's `examples/`.
 
 ## Language versions and layout
